@@ -62,9 +62,9 @@ export default function Navbar() {
       <div className="bg-black min-h-7 text-white p-2 flex flex-row justify-between px-8 md:px-16 lg:px-36">
         <div className="flex gap-4 items-center">
           {links.map((item, i) => (
-            <Link key={i} to={item.link} className="flex gap-2 items-center">
+            <Link key={i} to={item.link} className="flex gap-2 opacity-60 hover:opacity-100 duration-300 group items-center">
               {item.title}
-              <CaretDown size={16} />
+              <CaretDown className="group-hover:rotate-180 duration-700" size={16} />
             </Link>
           ))}
         </div>
