@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
 import HomepageLanding from "./pages/HomepageLanding.jsx";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomepageLanding />}/>
       </Routes>
+      <Footer />
     </div>
   );
 }
