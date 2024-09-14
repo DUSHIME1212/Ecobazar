@@ -8,6 +8,7 @@ export default function App() {
         <Navbar />
       <Routes>
         <Route path="/" element={<HomepageLanding />}/>
+        
       </Routes>
     </div>
   );
