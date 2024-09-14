@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/footer.jsx";
 import { Routes, Route } from "react-router-dom";
 import HomepageLanding from "./pages/HomepageLanding.jsx";
 
@@ -10,6 +11,7 @@ export default function App() {
         <Route path="/" element={<HomepageLanding />}/>
         
       </Routes>
+      <Footer />
     </div>
   );
 }
