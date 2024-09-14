@@ -1,5 +1,6 @@
 import { ArrowRight } from "@phosphor-icons/react";
 import CategoriesHolder from "../components/CategoriesHolder";
+import Footer from "../components/Footer";
 import { categories } from "../utils/utils";
 
 const HomepageLanding = () => {
@@ -119,6 +120,7 @@ const HomepageLanding = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
