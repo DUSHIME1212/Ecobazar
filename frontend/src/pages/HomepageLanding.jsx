@@ -1,6 +1,7 @@
 import { ArrowRight } from "@phosphor-icons/react";
 import CategoriesHolder from "../components/CategoriesHolder";
-import { categories } from "../utils/utils";
+import { categories, Products } from "../utils/utils";
+import ProductsHolder from "../components/ProductsHolder";
 
 const HomepageLanding = () => {
   return (
@@ -117,6 +118,23 @@ const HomepageLanding = () => {
               <CategoriesHolder key={i} imag={item.image} title={item.text} />
             ))}
           </div>
+        </div>
+      </div>
+      {/* {Popular Products} */}
+      <div className="w-full">
+        <h1>Popular Products</h1>
+        <div className="w-full flex mt-8 flex-row flex-wrap">
+          {[...Products,...Products,...Products,...Products,...Products,...Products,...Products,...Products,...Products,...Products].map((item, i) => (
+            <ProductsHolder
+              key={i}
+              imag={item.img}
+              name={item.name}
+              newprise={item.price}
+              oldprise={item.oldprice}
+              rate={item.rate}
+              sale={item.forsale}
+            />
+          ))}
         </div>
       </div>
     </div>

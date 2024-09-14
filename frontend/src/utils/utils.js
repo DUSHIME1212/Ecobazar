@@ -48,3 +48,14 @@ export const categories = [
         "text":"Fresh Fruit"
     }
 ]
+
+export const Products = [
+    {
+        forsale:'50% off',
+        img:"/category/image 1-1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+]

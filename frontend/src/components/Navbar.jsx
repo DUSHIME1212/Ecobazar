@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import {CaretDown, Heart, Phone, ShoppingCart } from "@phosphor-icons/react";
+import {CaretDown, Heart, MagnifyingGlass, Phone, ShoppingCart } from "@phosphor-icons/react";
 import gsap from "gsap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -41,8 +41,9 @@ export default function Navbar() {
             <form action="" className="flex">
               <label
                 htmlFor="ahsj"
-                className="w-full p-2 border border-black rounded-l-xl"
+                className="w-full p-2 flex items-center border border-black rounded-l-xl"
               >
+                <MagnifyingGlass size={16} className="mr-2"/>
                 <input type="text" name="" id="" className="outline-none" />
               </label>
               <button className="bg-green-500 border size-fit border-green-500 rounded-r-xl text-white px-8 p-2">
