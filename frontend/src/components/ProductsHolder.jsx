@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
   return (
-    <div className="w-1/5 flex flex-col justify-between group border relative border-black/20 hover:shadow-2xl hover:shadow-green-500/20 hover:border-green-500 p-2 min-h-80">
+    <div className="w-full md:w-1/2 xl:w-1/5 flex flex-col justify-between group border relative border-black/20 hover:shadow-2xl hover:shadow-green-500/20 hover:border-green-500 p-2 min-h-80">
       {sale ? (
         <span className="bg-red-500 p-1 text-sm px-2 size-fit text-white rounded-xl">
           {sale}
         </span>
       ) : (
-        ""
+        <span className='p-1 mt-6'></span>
       )}
       <img src={imag} alt={name} className="w-full h-40 object-contain" />
       <div className="absolute hidden group-hover:flex flex-col gap-2 duration-700 right-4 top-4">

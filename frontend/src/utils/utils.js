@@ -52,10 +52,79 @@ export const categories = [
 export const Products = [
     {
         forsale:'50% off',
+        img:"/category/image 1-2.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
+        img:"/category/image 1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
         img:"/category/image 1-1.png",
         name:'Green Apple',
         price:'$14.99',
         oldprice:'$20.99',
         rate:5
     },
+    {
+        img:"/category/image 1-1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
+        img:"/category/image 1-2.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
+        img:"/category/image 1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
+        img:"/category/image 1-1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        img:"/category/image 1-1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        forsale:'50% off',
+        img:"/category/image 1-2.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    },
+    {
+        img:"/category/image 1.png",
+        name:'Green Apple',
+        price:'$14.99',
+        oldprice:'$20.99',
+        rate:5
+    }
 ]
