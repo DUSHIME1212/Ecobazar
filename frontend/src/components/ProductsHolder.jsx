@@ -28,7 +28,7 @@ const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
             <h2 className="line-through opacity-40">{oldprise}</h2>
           </div>
         </div>
-        <div className="size-fit p-3 bg-black/10 rounded-full">
+        <div className="size-fit p-3 group-hover:bg-green-500 group-hover:text-white duration-700 bg-black/10 rounded-full">
           <ShoppingBag weight="light" size={24} />
         </div>
       </div>
