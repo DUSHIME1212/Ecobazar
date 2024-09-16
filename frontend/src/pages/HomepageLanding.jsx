@@ -8,6 +8,7 @@ import { TestimonialsHome } from "../sections/TestimonialsHome";
 import PopularCategories from "../sections/PopularCategories";
 import Featured from "../sections/Featured";
 import BannarHome from "../sections/BannarHome";
+import CompanyLogo from "../sections/CompanyLogo";
 
 const HomepageLanding = () => {
   return (
@@ -52,6 +53,9 @@ const HomepageLanding = () => {
       <div className="w-full gap-2 px-8 md:px-16 lg:px-32  flex flex-col items-start my-8 justify-start">
         <h1>Client Testimonials</h1>
         <TestimonialsHome />
+      </div>
+      <div className="px-8 md:px-16 lg:px-32">
+        <CompanyLogo/>
       </div>
     </div>
   );

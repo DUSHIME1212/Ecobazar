@@ -142,3 +142,12 @@ export const Products = [
         rate:5
     }
 ]
+
+export const  InstagramPost = [
+    '/instagram/Instagram Post.png',
+    '/instagram/Instagram Post-1.png',
+    '/instagram/Instagram Post-2.png',
+    '/instagram/Instagram Post-3.png',
+    '/instagram/Instagram Post-4.png',
+    '/instagram/Instagram Post-5.png',
+]
