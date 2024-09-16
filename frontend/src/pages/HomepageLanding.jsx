@@ -2,6 +2,7 @@ import { ArrowRight } from "@phosphor-icons/react";
 import CategoriesHolder from "../components/CategoriesHolder";
 import { categories, Products } from "../utils/utils";
 import ProductsHolder from "../components/ProductsHolder";
+import HotDeals from "../sections/HotDeals";
 
 const HomepageLanding = () => {
   return (
@@ -124,7 +125,7 @@ const HomepageLanding = () => {
       <div className="w-full">
         <h1>Popular Products</h1>
         <div className="w-full flex mt-8 flex-row flex-wrap">
-          {[...Products].map((item, i) => (
+          {[...Products].slice(0,10).map((item, i) => (
             <ProductsHolder
               key={i}
               imag={item.img}
@@ -189,6 +190,10 @@ const HomepageLanding = () => {
             <h1 className="text-xl">Started at <span className="text-yellow-500 bg-black p-1 px-2 rounded-lg opacity-100"> $79.99</span> </h1>
           </div>
         </div>
+      </div>
+      <div className='w-full gap-2 bg-gray-100 py-16'>
+        <h1>Hot Deals</h1>
+        <HotDeals/>
       </div>
     </div>
   );
