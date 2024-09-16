@@ -1,111 +1,25 @@
 import { ArrowRight } from "@phosphor-icons/react";
-import CategoriesHolder from "../components/CategoriesHolder";
-import { categories, Products } from "../utils/utils";
-import ProductsHolder from "../components/ProductsHolder";
+import ProductsHome from "../sections/ProcuctsHome";
 import HotDeals from "../sections/HotDeals";
+import AdsHotDeals from "../components/AdsHotDeals";
+import DiscountBannar from "../sections/DiscountBannar";
+import LatestNewsHome from "../sections/LatestNewsHome";
+import { TestimonialsHome } from "../sections/TestimonialsHome";
+import PopularCategories from "../sections/PopularCategories";
+import Featured from "../sections/Featured";
+import BannarHome from "../sections/BannarHome";
 
 const HomepageLanding = () => {
   return (
-    <div className="px-8 md:px-16 lg:px-32 flex flex-col gap-4">
-      <div className="w-full min-h-[512px] grid grid-cols-3 gap-2 grid-rows-2 mt-2">
-        <div
-          className="col-span-2 rounded-xl row-span-2 bg-green-500 relative object-cover"
-          style={{ backgroundImage: `url('/Bannar Big.png') ` }}
-        >
-          <div className="p-2 flex text-white w-2/3 flex-col gap-4 absolute top-8 left-8">
-            <h1 className="text-5xl">Fresh & Healthy Organic Food</h1>
-            <div className="p-4 size-fit border-l-4 flex flex-col gap-2 border-green-200">
-              <h1 className="text-lg">
-                Sale up to{" "}
-                <span className="p-2 ml-2 bg-orange-400 rounded-lg">
-                  30% OFF
-                </span>
-              </h1>
-              <p className="text-sm">Free shipping on all your order.</p>
-            </div>
-            <button className="px-8 p-4 flex items-center gap-4 size-fit bg-white text-green-500 rounded-full">
-              <span>Shop now</span>
-              <ArrowRight size={16} />
-            </button>
-          </div>
-        </div>
-        <div
-          className="col-span-1 rounded-xl bg-green-300 relative"
-          style={{ backgroundImage: `url('/BG.png') ` }}
-        >
-          <div className="absolute flex flex-col gap-4 top-8 left-8">
-            <div>
-              <span className="text-xl">Summer Sale</span>
-              <h1 className="text-3xl font-bold">75% OFF</h1>
-            </div>
-            <p className="text-sm opacity-40">Only Fruit & Vegetable</p>
-            <button className="flex items-center gap-4 size-fit text-green-500">
-              <span>Shop now</span>
-              <ArrowRight size={16} />
-            </button>
-          </div>
-        </div>
-        <div
-          className="col-span-1 rounded-xl grid place-items-center bg-gray-300 text-white"
-          style={{ backgroundImage: `url('/Bannar.png') ` }}
-        >
-          <div className="flex flex-col gap-4 text-center p-8 justify-center items-center">
-            <span className="text-xl">Best Deal</span>
-            <h1 className="font-bold text-3xl">
-              Special Products Deal of the Month
-            </h1>
-            <button className="flex items-center gap-4 size-fit text-green-500">
-              <span>Shop now</span>
-              <ArrowRight size={16} />
-            </button>
-          </div>
-        </div>
+    <div className=" flex flex-col gap-4">
+      <div className="px-8 md:px-16 lg:px-32">
+        <BannarHome />
       </div>
-      <div className="flex flex-wrap justify-between p-4 rounded-3xl shadow-lg">
-        <div className="p-4 flex items-center">
-          <img
-            src={"/img/delivery-truck 1.png"}
-            className="size-12"
-            alt="product1"
-          />
-          <div className="flex ml-6 flex-col gap-1">
-            <span>Free Shipping</span>
-            <p className="text-sm opacity-40">
-              Free shipping on all your order
-            </p>
-          </div>
-        </div>
-        <div className="p-4 flex items-center">
-          <img
-            src={"/img/headphones 1.png"}
-            className="size-12"
-            alt="product1"
-          />
-          <div className="flex ml-6 flex-col gap-1">
-            <span>Customer Support 24/7</span>
-            <p className="text-sm opacity-40">Instant access to Support</p>
-          </div>
-        </div>
-        <div className="p-4 flex items-center">
-          <img
-            src={"/img/shopping-bag.png"}
-            className="size-12"
-            alt="product1"
-          />
-          <div className="flex ml-6 flex-col gap-1">
-            <span>100% Secure Payment</span>
-            <p className="text-sm opacity-40">We ensure your money is save</p>
-          </div>
-        </div>
-        <div className="p-4 flex items-center">
-          <img src={"/img/package.png"} className="size-12" alt="product1" />
-          <div className="flex ml-6 flex-col gap-1">
-            <span>Money-Back Guarantee</span>
-            <p className="text-sm opacity-40">30 Days Money-Back Guarantee</p>
-          </div>
-        </div>
+      <div className="flex px-8 md:px-16 lg:px-32">
+        <Featured />
       </div>
-      <div>
+      {/* Categories */}
+      <div className="px-8 md:px-16 lg:px-32">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Popular Categories</h1>
           <div className="flex gap-2 items-center text-green-500 underline cursor-pointer">
@@ -113,87 +27,31 @@ const HomepageLanding = () => {
             <ArrowRight size={16} />
           </div>
         </div>
-        <div>
-          <div className="flex flex-wrap mt-4 justify-between gap-2 p-4 min-h-[512px] rounded-3xl shadow-lg">
-            {categories.map((item, i) => (
-              <CategoriesHolder key={i} imag={item.image} title={item.text} />
-            ))}
-          </div>
-        </div>
+        <PopularCategories />
       </div>
       {/* {Popular Products} */}
-      <div className="w-full">
+      <div className="w-full px-8 md:px-16 lg:px-32">
         <h1>Popular Products</h1>
-        <div className="w-full flex mt-8 flex-row flex-wrap">
-          {[...Products].slice(0,10).map((item, i) => (
-            <ProductsHolder
-              key={i}
-              imag={item.img}
-              name={item.name}
-              newprise={item.price}
-              oldprise={item.oldprice}
-              rate={item.rate}
-              sale={item.forsale}
-            />
-          ))}
-        </div>
+        <ProductsHome />
       </div>
       {/* hot deals */}
-      <div className="w-full flex flex-row gap-2 min-h-[512px]">
-        <div
-          className="w-1/3 min-h-[512px] rounded-3xl object-cover"
-          style={{ backgroundImage: `url('/timestamp/Rectangle 54.png')` }}
-        >
-          <div className="flex flex-col text-white gap-4 items-center h-full p-4">
-            <p className="text-xl">Hot Deals</p>
-            <h1>Sale of the Month</h1>
-            <div className="flex flex-row gap-2 items-start">
-              <h1 className="flex justify-center flex-col items-center text-lg">
-                <span>00</span>
-                <span>Days</span>
-              </h1>
-              :
-              <h1 className="flex justify-center flex-col items-center text-lg">
-                <span>00</span>
-                <span>Hours</span>
-              </h1>
-              :
-              <h1 className="flex justify-center flex-col items-center text-lg">
-                <span>00</span>
-                <span>Mins</span>
-              </h1>
-              :
-              <h1 className="flex justify-center flex-col items-center text-lg">
-                <span>00</span>
-                <span>Secs</span>
-              </h1>
-            </div>
-          </div>
-        </div>
-        <div
-          className="w-1/3 min-h-[512px] rounded-3xl object-cover"
-          style={{ backgroundImage: `url('/timestamp/Rectangle 54 (1).png')` }}
-        >
-          <div className="flex justify-center items-center flex-col gap-4 p-4 text-white">
-            <h2>85% Fat Free</h2>
-            <h1>Low-Fat Meat</h1>
-            <h1 className="text-lg">Started at<span className="text-orange-500 opacity-100"> $79.99</span> </h1>
-          </div>
-        </div>
-        <div
-          className="w-1/3 min-h-[512px] rounded-3xl object-cover"
-          style={{ backgroundImage: `url('/timestamp/Rectangle 54 (2).png')` }}
-        >
-          <div className="flex justify-center items-center flex-col gap-4 p-4 text-black">
-            <h2>Summer Sale</h2>
-            <h1>100% Fresh Fruit</h1>
-            <h1 className="text-xl">Started at <span className="text-yellow-500 bg-black p-1 px-2 rounded-lg opacity-100"> $79.99</span> </h1>
-          </div>
-        </div>
+      <div className="w-full flex px-8 md:px-16 lg:px-32 flex-row gap-2 min-h-[512px]">
+        <AdsHotDeals />
       </div>
-      <div className='w-full gap-2 bg-gray-100 py-16'>
+      <div className="w-full px-8 md:px-16 lg:px-32 gap-2 bg-gray-100 py-16">
         <h1>Hot Deals</h1>
-        <HotDeals/>
+        <HotDeals />
+      </div>
+      <div className="w-full gap-2 px-8 md:px-16 lg:px-32">
+        <DiscountBannar />
+      </div>
+      <div className="w-full px-8 md:px-16 lg:px-32 gap-2 min-h-[512px] flex flex-col items-center justify-start">
+        <h1>Latest News</h1>
+        <LatestNewsHome />
+      </div>
+      <div className="w-full gap-2 px-8 md:px-16 lg:px-32  flex flex-col items-start my-8 justify-start">
+        <h1>Client Testimonials</h1>
+        <TestimonialsHome />
       </div>
     </div>
   );
