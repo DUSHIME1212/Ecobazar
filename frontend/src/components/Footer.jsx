@@ -13,9 +13,9 @@ import {
      { name: <InstagramLogo size={20} />, url: "https://example.com/logo1" },
    ];
    return (
-     <footer className="my-8">
+     <footer className="">
        {/* top */}
-       <div className="flex justify-between my-2 items-center px-8 md:px-16 lg:px-32">
+       <div className="flex justify-between my-8 items-center px-8 md:px-16 lg:px-32">
          <div className="w-1/2 flex flex-col gap-4 my-4">
            <h1 className="font-bold text-3xl">Subcribe our Newsletter</h1>
            <p className="opacity-40">

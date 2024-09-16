@@ -31,7 +31,7 @@ const CompanyLogo = () => {
                     <div className="absolute top-0 left-0 z-10 size-full duration-700 group-hover:bg-black/30"/>
                     <span className="absolute z-20 top-1/2 left-1/2 duration-700 -translate-y-1/2 -translate-x-1/2">
                     
-                        <InstagramLogo className="text-white hidden group-hover:block" size={24} />
+                        <InstagramLogo className="text-white hidden duration-700 group-hover:block" size={24} />
                     </span>
                 </div>
             ))

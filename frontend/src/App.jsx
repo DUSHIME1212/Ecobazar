@@ -2,6 +2,8 @@ import Navbar from "./components/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
 import HomepageLanding from "./pages/HomepageLanding.jsx";
 import Footer from "./components/Footer.jsx";
+import PagenotFound from "./pages/PagenotFound.jsx";
+import FAQs from "./pages/FAQs.jsx";
 
 export default function App() {
   return (
@@ -9,6 +11,8 @@ export default function App() {
         <Navbar />
       <Routes>
         <Route path="/" element={<HomepageLanding />}/>
+        <Route path="/FAQs" element={<FAQs />}/>
+        <Route path="*" element={<PagenotFound />}/>
       </Routes>
       <Footer />
     </div>
