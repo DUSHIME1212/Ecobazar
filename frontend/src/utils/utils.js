@@ -173,6 +173,10 @@ export const faqs = [
     {
       question: "How can I contact customer support?",
       answer: "You can contact our customer support team via email at support@example.com, or by calling our hotline at 1-800-123-4567. Our support hours are Monday to Friday, 9 AM to 5 PM."
+    },
+    {
+      question: "How can I contact customer support?",
+      answer: "You can contact our customer support team via email at support@example.com, or by calling our hotline at 1-800-123-4567. Our support hours are Monday to Friday, 9 AM to 5 PM."
     }
   ];
   
