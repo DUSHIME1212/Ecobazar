@@ -14,10 +14,10 @@ function LoginAuth() {
   }
 
   return (
-    <div className="h-[65dvh] w-full flex flex-col justify-start items-center">
+    <div className="min-h-[65dvh] w-full flex flex-col justify-start items-center">
       <Breadcrumbs pageroute={pageid.pathname} />
       <div
-        className="flex flex-col items-center justify-center w-[36dvw] bg-white p-8 border rounded-xl hover:shadow-xl transition-all duration-300 h-[48dvh]"
+        className="flex flex-col items-center justify-center w-[36dvw] bg-white p-8 my-8 border rounded-xl hover:shadow-xl transition-all duration-300 min-h-[48dvh]"
         id="card"
       >
         <h1>Sign In</h1>
@@ -56,7 +56,7 @@ function LoginAuth() {
           </button>
           <h3 className="text-sm opacity-100">
             Don’t have account?{" "}
-            <Link className="opacity-100" to={"/"}>
+            <Link className="opacity-100" to={"/signup"}>
               Register
             </Link>
           </h3>

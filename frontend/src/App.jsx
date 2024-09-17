@@ -5,6 +5,7 @@ import Footer from "./components/footer.jsx";
 import LoginAuth from "./pages/settings/login.jsx";
 import PagenotFound from "./pages/PagenotFound.jsx";
 import FAQs from "./pages/FAQs.jsx";
+import SignUp from "./pages/settings/signIn.jsx";
 
 export default function App() {
   return (
@@ -13,7 +14,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomepageLanding />} />
         <Route path="/FAQs" element={<FAQs />} />
-        <Route path="/profile" element={<LoginAuth />} />
+        <Route path="/login" element={<LoginAuth />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<PagenotFound />} />
       </Routes>
       <Footer />
