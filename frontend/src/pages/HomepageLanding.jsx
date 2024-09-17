@@ -47,7 +47,7 @@ const HomepageLanding = () => {
         <DiscountBannar />
       </div>
       <div className="w-full px-8 md:px-16 lg:px-32 gap-2 min-h-[512px] flex flex-col items-center justify-start">
-        <h1>Latest News</h1>
+        <h1 className="my-8">Latest News</h1>
         <LatestNewsHome />
       </div>
       <div className="w-full gap-2 px-8 md:px-16 lg:px-32  flex flex-col items-start my-8 justify-start">

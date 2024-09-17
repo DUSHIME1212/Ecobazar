@@ -26,7 +26,7 @@ export default function Navbar() {
     { title: "Pages", link: "" },
     { title: "Blog", link: "" },
     { title: "About Us", link: "" },
-    { title: "Contact Us", link: "" },
+    { title: "Contact Us", link: "/FAQs" },
   ];
 
   return (

@@ -9,12 +9,13 @@ import FAQs from "./pages/FAQs.jsx";
 export default function App() {
   return (
     <div className="min-h-screen w-full capitalize">
-        <Navbar />
+      <Navbar />
       <Routes>
-        <Route path="/" element={<HomepageLanding />}/>
-        <Route path="/FAQs" element={<FAQs />}/>
-        <Route path="*" element={<PagenotFound />}/>
-        <Route path="/profile" element={<LoginAuth/>}  />
+        <Route path="/" element={<HomepageLanding />} />
+        <Route path="/FAQs" element={<FAQs />} />
+        <Route path="/profile" element={<LoginAuth />} />
+
+        <Route path="*" element={<PagenotFound />} />
       </Routes>
       <Footer />
     </div>

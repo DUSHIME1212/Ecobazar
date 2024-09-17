@@ -25,7 +25,7 @@ const FAQs = () => {
               </div>
               <button
                 onClick={() => handleToggle(i)}
-                className="absolute right-2 top-2 bg-gray-200 p-2 rounded-xl"
+                className="absolute right-2 top-2 bg-gray-200/10 p-2 rounded-xl"
               >
                 <Plus
                   className={`${

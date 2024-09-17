@@ -14,3 +14,12 @@ p{
 li{
     @apply text-sm hover:opacity-70 duration-700 opacity-40;
 }
+
+input[type="checkbox"]{
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    accent-color: #00b207;
+  }
+  
+  
