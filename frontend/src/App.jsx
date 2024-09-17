@@ -14,7 +14,6 @@ export default function App() {
         <Route path="/" element={<HomepageLanding />} />
         <Route path="/FAQs" element={<FAQs />} />
         <Route path="/profile" element={<LoginAuth />} />
-
         <Route path="*" element={<PagenotFound />} />
       </Routes>
       <Footer />

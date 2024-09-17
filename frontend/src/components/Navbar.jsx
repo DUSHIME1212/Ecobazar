@@ -1,20 +1,14 @@
-import { useGSAP } from "@gsap/react";
-import {CaretDown, Heart, MagnifyingGlass, Phone, ShoppingCart } from "@phosphor-icons/react";
-import gsap from "gsap";
+import {
+  CaretDown,
+  Heart,
+  MagnifyingGlass,
+  Phone,
+  ShoppingCart,
+} from "@phosphor-icons/react";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function Navbar() {
-    useGSAP(() => {
-        gsap.from(".link div", {
-          duration: 1,
-          y: -100,
-          opacity:0,
-          ease:"ease",
-          stagger:{
-            amount:1
-          }
-        })
-      })
   const [like, isliked] = useState(false);
 
   function handlelike() {
@@ -43,7 +37,7 @@ export default function Navbar() {
                 htmlFor="ahsj"
                 className="w-full p-2 flex items-center border border-black rounded-l-xl"
               >
-                <MagnifyingGlass size={16} className="mr-2"/>
+                <MagnifyingGlass size={16} className="mr-2" />
                 <input type="text" name="" id="" className="outline-none" />
               </label>
               <button className="bg-green-500 border size-fit border-green-500 rounded-r-xl text-white px-8 p-2">
@@ -76,9 +70,16 @@ export default function Navbar() {
       <div className="bg-black min-h-7 text-white p-2 flex flex-row justify-between px-8 md:px-16 lg:px-36">
         <div className="flex gap-4 items-center">
           {links.map((item, i) => (
-            <Link key={i} to={item.link} className="flex gap-2 opacity-60 hover:opacity-100 duration-300 group items-center ">
+            <Link
+              key={i}
+              to={item.link}
+              className="flex gap-2 opacity-60 hover:opacity-100 duration-300 group items-center "
+            >
               {item.title}
-              <CaretDown className="group-hover:rotate-180 duration-700" size={16} />
+              <CaretDown
+                className="group-hover:rotate-180 duration-700"
+                size={16}
+              />
             </Link>
           ))}
         </div>
