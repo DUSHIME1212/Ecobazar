@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Eye, EyeSlash } from 'react-bootstrap-icons';
-import Breadcrumbs from '../components/Breadcrumbs';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
 
 function LoginAuth() {
   const pageid = useLocation();
