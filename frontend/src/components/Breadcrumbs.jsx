@@ -2,7 +2,7 @@ import { CaretRight, House } from "@phosphor-icons/react";
 import PropTypes from "prop-types";
 
 const Breadcrumbs = ({ pageroute }) => {
-  const pageId = pageroute || 'default';
+  const pageId = pageroute.replace('/','') || 'default';
 
   return (
     <div

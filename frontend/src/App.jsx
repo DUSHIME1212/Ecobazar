@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
 import HomepageLanding from "./pages/HomepageLanding.jsx";
-import Footer from "./components/footer.jsx";
+import Footer from "./components/Footer.jsx";
 import LoginAuth from "./pages/settings/login.jsx";
 import PagenotFound from "./pages/PagenotFound.jsx";
 import FAQs from "./pages/FAQs.jsx";

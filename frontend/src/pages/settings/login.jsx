@@ -1,16 +1,17 @@
-import { Eye, EyeSlash } from "@phosphor-icons/react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Breadcrumbs from "../../components/Breadcrumbs";
+import { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
 
 function LoginAuth() {
-  const pageid = useLocation( );
-  const [seePassword, Setseepassword] = useState(0);
+  const pageid = useLocation();
+  const [seePassword, setSeePassword] = useState(false);
+
+ 
   function handleSee(e) {
     e.preventDefault();
-    Setseepassword((prev) => !prev);
+    setSeePassword((prev) => !prev);
     console.log(pageid);
-    
   }
 
   return (
@@ -27,6 +28,7 @@ function LoginAuth() {
               type="email"
               placeholder="Email"
               className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+              name="email"
             />
           </label>
           <label htmlFor="" className="relative w-full">
@@ -34,6 +36,7 @@ function LoginAuth() {
               type={seePassword ? "text" : "password"}
               placeholder="Password"
               className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+              name="password"
             />
             <button
               onClick={handleSee}
@@ -55,7 +58,7 @@ function LoginAuth() {
             Sign In
           </button>
           <h3 className="text-sm opacity-100">
-            Don’t have account?{" "}
+          {` Don't have account?{" "}`}
             <Link className="opacity-100" to={"/signup"}>
               Register
             </Link>
@@ -64,6 +67,6 @@ function LoginAuth() {
       </div>
     </div>
   );
-}
 
+}
 export default LoginAuth;
