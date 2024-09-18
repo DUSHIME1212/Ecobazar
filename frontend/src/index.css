@@ -22,4 +22,7 @@ input[type="checkbox"]{
     accent-color: #00b207;
   }
   
+.nav {
+    @apply flex pl-5 items-center h-9 hover:bg-gray-400 w-full hover:border-l-4 hover:border-green-600;
+}
   

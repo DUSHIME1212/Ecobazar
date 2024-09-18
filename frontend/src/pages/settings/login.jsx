@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 function LoginAuth() {
-  const pageid = useLocation();
+  const pageid = useLocation( );
   const [seePassword, Setseepassword] = useState(0);
   function handleSee(e) {
     e.preventDefault();

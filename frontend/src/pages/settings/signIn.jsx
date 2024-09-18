@@ -20,7 +20,7 @@ const SignUp = () => {
           className="flex flex-col items-center justify-center w-[36dvw] bg-white p-8 my-8 py-8 border rounded-xl hover:shadow-xl transition-all duration-300 mi-h-[48dvh]"
           id="card"
         >
-          <h1>Sign up</h1>
+          <h1>Create account</h1>
           <form className="flex flex-col items-center size-full p-4 space-y-3">
             <label htmlFor="" className="relative w-full">
               <input
@@ -65,7 +65,7 @@ const SignUp = () => {
               </a>
             </span>
             <button className="p-2 text-sm w-full rounded-full bg-[#00b207] bg-opacity-70 hover:bg-opacity-100 duration-700 text-white">
-              Sign In
+             Create account
             </button>
             <h3 className="text-sm opacity-100">
               if you have an account?{" "}
