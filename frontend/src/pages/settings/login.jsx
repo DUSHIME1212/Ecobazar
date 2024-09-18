@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs';
@@ -57,7 +58,7 @@ function LoginAuth() {
             Sign In
           </button>
           <h3 className="text-sm opacity-100">
-          {` Don't have account?{" "}`}
+            Don't  have account?{" "}
             <Link className="opacity-100" to={"/signup"}>
               Register
             </Link>
