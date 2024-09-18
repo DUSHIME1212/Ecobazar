@@ -1,16 +1,16 @@
-import { Eye, EyeSlash } from "@phosphor-icons/react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Breadcrumbs from "../../components/Breadcrumbs";
+import { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { Eye, EyeSlash } from 'react-bootstrap-icons';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 function LoginAuth() {
   const pageid = useLocation();
-  const [seePassword, Setseepassword] = useState(0);
+  const [seePassword, setSeePassword] = useState(false);
+  
   function handleSee(e) {
     e.preventDefault();
-    Setseepassword((prev) => !prev);
+    setSeePassword((prev) => !prev);
     console.log(pageid);
-    
   }
 
   return (
@@ -57,7 +57,7 @@ function LoginAuth() {
             Sign In
           </button>
           <h3 className="text-sm opacity-100">
-            Don’t have account?{" "}
+          {` Don't have account?{" "}`}
             <Link className="opacity-100" to={"/signup"}>
               Register
             </Link>
