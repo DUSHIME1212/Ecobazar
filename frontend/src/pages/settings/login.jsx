@@ -6,7 +6,6 @@ import { Eye, EyeSlash } from '@phosphor-icons/react';
 function LoginAuth() {
   const pageid = useLocation();
   const [seePassword, setSeePassword] = useState(false);
-
  
   function handleSee(e) {
     e.preventDefault();
@@ -67,6 +66,5 @@ function LoginAuth() {
       </div>
     </div>
   );
-
 }
 export default LoginAuth;
