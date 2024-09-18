@@ -27,6 +27,7 @@ function LoginAuth() {
               type="email"
               placeholder="Email"
               className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+              name="email"
             />
           </label>
           <label htmlFor="" className="relative w-full">
@@ -34,6 +35,7 @@ function LoginAuth() {
               type={seePassword ? "text" : "password"}
               placeholder="Password"
               className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+              name="password"
             />
             <button
               onClick={handleSee}
