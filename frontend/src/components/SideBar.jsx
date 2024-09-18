@@ -8,7 +8,7 @@ import { CiLogin } from "react-icons/ci";
 function SideBar() {
     return (
        <div className="flex flex-col h-[47dvh] w-[15dvw] rounded-md border border-solid  mx-4 m-8 left-16 relative">
-          <p className="left-4 relative top-3 text-black font-semibold ">
+          <p className="pl-5 relative top-3 text-black font-semibold ">
             Navigation
           </p>
           <span className="flex flex-col justify-between pt-4">
