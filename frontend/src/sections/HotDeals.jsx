@@ -5,7 +5,7 @@ import { Products } from "../utils/utils";
 const HotDeals = () => {
   const off = 50;
   return (
-    <div className="grid grid-rows-3 grid-cols-5 min-h-[720px]">
+    <div className="grid grid-rows-8 lg:grid-rows-3 lg:grid-cols-5 min-h-[720px]">
       {Products.slice(0, 1).map((product, index) => (
         <div
           key={index}

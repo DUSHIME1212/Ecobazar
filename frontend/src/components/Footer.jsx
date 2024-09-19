@@ -13,17 +13,17 @@ import {
      { name: <InstagramLogo size={20} />, url: "https://example.com/logo1" },
    ];
    return (
-     <footer className="">
+     <footer className="w-full">
        {/* top */}
-       <div className="flex justify-between my-8 items-center px-8 md:px-16 lg:px-32">
-         <div className="w-1/2 flex flex-col gap-4 my-4">
+       <div className="flex flex-col lg:flex-row justify-between my-8 items-center px-8 md:px-16 lg:px-32">
+         <div className="w-full lg:w-1/2 flex flex-col gap-4 my-4">
            <h1 className="font-bold text-3xl">Subcribe our Newsletter</h1>
            <p className="opacity-40">
              Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
              Phasellus imperdiet elit eu magna.
            </p>
          </div>
-         <div className="w-1/2 flex items-center gap-4 justify-between">
+         <div className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center gap-4 justify-between">
            <form
              action=""
              className="overflow-clip border flex-1 flex flex-row border-black/30 rounded-full"
@@ -51,8 +51,8 @@ import {
          </div>
        </div>
        {/* bottom */}
-       <div className="bg-black text-white min-h-72 px-8 md:px-16 lg:px-32 py-8 flex gap-4 flex-row">
-         <div className="w-1/2 flex flex-col gap-4">
+       <div className="bg-black text-white min-h-72 px-8 md:px-16 lg:px-32 py-8 flex gap-4 flex-col lg:flex-row">
+         <div className="w-full lg:w-1/2 flex flex-col gap-4">
            <h1 className="flex gap-4">
              <img src="/Vector.png" alt="" />
              <span>Ecobazar</span>
@@ -67,8 +67,8 @@ import {
              <p className="underline">Proxy@gmail.com</p>
            </div>
          </div>
-         <div className="w-full flex">
-           <div className="w-[30%] flex flex-col gap-4">
+         <div className="w-full flex flex-col lg:flex-row">
+           <div className="lg:w-[30%] flex flex-col gap-4">
              <h2>My Account</h2>
              <ul className="flex flex-col gap-2">
                <li>My Account</li>
@@ -77,7 +77,7 @@ import {
                <li>Wishlist</li>
              </ul>
            </div>
-           <div className="w-[30%] flex flex-col gap-4">
+           <div className="lg:w-[30%] flex flex-col gap-4">
              <h2>My Account</h2>
              <ul className="flex flex-col gap-2">
                <li>My Account</li>
@@ -86,7 +86,7 @@ import {
                <li>Wishlist</li>
              </ul>
            </div>
-           <div className="w-[30%] flex flex-col gap-4">
+           <div className="lg:w-[30%] flex flex-col gap-4">
              <h2>My Account</h2>
              <ul className="flex flex-col gap-2">
                <li>My Account</li>
@@ -95,7 +95,7 @@ import {
                <li>Wishlist</li>
              </ul>
            </div>
-           <div className="w-[30%] flex flex-col gap-4">
+           <div className="lg:w-[30%] flex flex-col gap-4">
              <h2>My Account</h2>
              <ul className="flex flex-col gap-2">
                <li>My Account</li>
