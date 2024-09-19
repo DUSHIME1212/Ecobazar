@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import SideBar from "../../components/SideBar";
 import { useState } from "react";
+
   function DashBoard() {
     const [editing, setEditing] = useState(false);
     const [profileImage, setImage] = useState("/avatar/avatarone.jpg");

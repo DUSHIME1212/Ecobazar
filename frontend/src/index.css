@@ -25,4 +25,7 @@ input[type="checkbox"]{
 .nav {
     @apply flex pl-5 items-center h-9 hover:bg-gray-400 w-full hover:border-l-4 hover:border-green-600;
 }
-  
+
+.input_controllers {
+    @apply w-[320px] h-[30px] outline-none border border-solid rounded-md focus:border-2 focus:border-solid focus:border-green-500 placeholder:text-gray-300 pl-2 font-semibold ; 
+}

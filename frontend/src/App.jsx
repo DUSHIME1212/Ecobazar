@@ -7,6 +7,7 @@ import PagenotFound from "./pages/PagenotFound.jsx";
 import FAQs from "./pages/FAQs.jsx";
 import SignUp from "./pages/settings/signIn.jsx";
 import DashBoard from "./pages/settings/DashBoard.jsx";
+import AccountSettings from "./pages/settings/settings.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<PagenotFound />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/settings" element={<AccountSettings />} />
       </Routes>
       <Footer />
     </div>
