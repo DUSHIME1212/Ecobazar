@@ -18,9 +18,9 @@ export default function App() {
         <Route path="/FAQs" element={<FAQs />} />
         <Route path="/login" element={<LoginAuth />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<PagenotFound />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/settings" element={<AccountSettings />} />
+        <Route path="*" element={<PagenotFound />} />
       </Routes>
       <Footer />
     </div>

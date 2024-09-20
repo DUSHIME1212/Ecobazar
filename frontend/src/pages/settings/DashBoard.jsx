@@ -26,13 +26,13 @@ import { useState } from "react";
     return (
       <div className="flex flex-col">
         <Breadcrumbs pageroute={pathName.pathname} />
-        <div className="flex">
-          <div className="w-1/4">
+        <div className="flex flex-col lg:flex-row">
+          <div className=" w-full lg:w-1/4">
             <SideBar />
           </div>
-          <div className="w-3/4 flex flex-col">
-            <div className="flex">
-              <div className="flex flex-col items-center border rounded-md w-[34dvw] h-[38dvh] mt-7 mr-4">
+          <div className="w-full lg:w-3/4 flex flex-col">
+            <div className="flex flex-col w-full lg:flex-row">
+              <div className="flex flex-col items-center border rounded-md w-full lg:min-w-[34dvw] h-[38dvh] mt-7 mr-4">
                 {editing ? (
                   <input
                     type="file"
@@ -73,7 +73,7 @@ import { useState } from "react";
                   {editing ? "Save Profile" : "Edit Profile"}
                 </button>
               </div>
-              <div className="p-4 border rounded-md w-[32dvw] h-[38dvh] mt-7">
+              <div className="p-4 border rounded-md w-full lg:min-w-[32dvw] h-[38dvh] mt-7">
                 <p className="text-sm">BILLING ADDRESS</p>
                 <div>
                   {editingAddress ? (
@@ -122,7 +122,7 @@ import { useState } from "react";
               </div>
             </div>
             <div className="mt-4 w-full">
-              <div className="p-4 border rounded-md w-[66dvw] h-full">
+              <div className="p-4 border rounded-md min-w-[66dvw] h-full">
                 <span className="flex justify-between mb-4">
                   <h1 className="font-bold">Recent Order History</h1>
                   <button className="text-green-500">view all</button>

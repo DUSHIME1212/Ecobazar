@@ -10,8 +10,8 @@ const FAQs = () => {
   }
 
   return (
-    <div className="min-h-[512px] px-8 md:px-16 lg:px-32 flex flex-row w-full">
-      <div className="w-1/2 p-8 flex flex-col gap-4">
+    <div className="min-h-[512px] px-8 md:px-16 lg:px-32 flex flex-col lg:flex-row w-full">
+      <div className="w-full lg:w-1/2 p-8 flex flex-col gap-4">
         <h1 className="py-2">Welcome, Let&apos;s Talk About Our Ecobazar</h1>
         <div>
           {faqs.map((item, i) => (
@@ -38,7 +38,7 @@ const FAQs = () => {
           ))}
         </div>
       </div>
-      <div className="w-1/2 h-full object-contain">
+      <div className="w-full lg:w-1/2 h-full object-contain">
         <img src="/Image.png" alt="" />
       </div>
     </div>
