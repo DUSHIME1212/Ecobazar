@@ -6,14 +6,14 @@ const FAQs = () => {
   const [selectedIndex, setSelectedIndex] = useState(4);
 
   function handleToggle(index) {
-    setSelectedIndex((prevIndex) => (prevIndex === index ? null : index));
+    setSelectedIndex((prevIndex) => (prevIndex === index ? '' : index));
   }
 
   return (
     <div className="min-h-[512px] px-8 md:px-16 lg:px-32 flex flex-col lg:flex-row w-full">
-      <div className="w-full lg:w-1/2 p-8 flex flex-col gap-4">
+      <div className="w-full lg:w-1/2 lg:p-8 flex flex-col gap-4">
         <h1 className="py-2">Welcome, Let&apos;s Talk About Our Ecobazar</h1>
-        <div>
+        <div className="flex flex-col gap-2">
           {faqs.map((item, i) => (
             <div
               key={i}
