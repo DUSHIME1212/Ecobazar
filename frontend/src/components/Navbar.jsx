@@ -45,26 +45,26 @@ export default function Navbar() {
   const price = 50
 
   return (
-    <header className="link">
+    <header className="fixed w-full top-0 bg-white z-30">
       <div className="px-8 md:px-16 lg:px-36 py-2">
         <div className="flex flex-row items-center justify-between">
-          <div className={"min-w-6 flex gap-4 items-center"}>
+          <Link to={'/'} className={"min-w-6 flex gap-4 items-center"}>
             <img src="/Vector.png" alt="" className="size-8" />
             <span className="max-sm:hidden text-2xl">Ecobazar</span>
-          </div>
+          </Link>
           <div className="lg:min-w-96">
             <button className="lg:hidden block">
               <MagnifyingGlass size={16} className="text-black" />
             </button>
-            <form action="" className="hidden lg:flex ">
+            <form action="" className="hidden lg:flex border rounded-xl overflow-clip border-black">
               <label
                 htmlFor="ahsj"
-                className="w-full p-2 flex items-center border border-black rounded-l-xl"
+                className="w-full p-2 flex items-center"
               >
                 <MagnifyingGlass size={16} className="mr-2" />
                 <input type="text" name="" id="" className="outline-none" />
               </label>
-              <button className="bg-green-500 border size-fit border-green-500 rounded-r-xl text-white px-8 p-2">
+              <button className="bg-green-500 border size-fit border-green-500 text-white px-8 p-2">
                 Search
               </button>
             </form>
@@ -78,7 +78,7 @@ export default function Navbar() {
                 size={32}
               />
               {like && (
-                <div className="flex gap-4 flex-col bg-white shadow-2xl ring-2 ring-white rounded-xl right-0 min-w-96 min-h-8 absolute z-20 p-4">
+                <div className="flex gap-4 flex-col bg-white shadow-2xl ring-2 ring-white rounded-xl -right-8 md:right-0 min-w-96 min-h-8 absolute z-20 p-4">
                   <div className="flex gap-4 p-2 items-center">
                     <img
                       src="/avatar/avatarone.jpg"
@@ -112,7 +112,7 @@ export default function Navbar() {
                 <ShoppingCart size={32} onClick={handleshowcart} />
               </div>
               {showcart && (
-                <div className="flex flex-col justify-between bg-white right-0 rounded-xl shadow-2xl top-16 min-w-96 min-h-[80vh] absolute z-20 p-4">
+                <div className="flex flex-col justify-between bg-white -right-8 md:right-0 rounded-xl shadow-2xl top-16 min-w-96 min-h-[80vh] absolute z-20 p-4">
                   <div className="flex flex-row gap-4 p-2">
                     <img
                       src="../../public/products/Image-10.png"
@@ -125,6 +125,7 @@ export default function Navbar() {
                       <input
                         type="number"
                         max={3}
+                        min={0}
                         value={num}
                         className="p-2 w-full rounded-xl"
                         onChange={handlesetnum}
@@ -144,7 +145,7 @@ export default function Navbar() {
               )}
               <div className="hidden lg:block">
                 <h1 className="text-sm">Shopping cart</h1>
-                <p className="font-bold text-lg">$59.00</p>
+                <p className="font-bold text-sm">{ price*num} USD</p>
               </div>
             </div>
           </div>
@@ -188,7 +189,7 @@ export default function Navbar() {
         </div>
         <div className="flex gap-2 items-center">
           <Phone size={32} />
-          <span>(219) 555-0114</span>
+          <span>(250) 785-0114</span>
         </div>
       </div>
     </header>

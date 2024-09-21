@@ -13,7 +13,8 @@ export default function App() {
   return (
     <div className="min-h-screen w-full capitalize">
       <Navbar />
-      <Routes>
+      <div className='mt-32'>
+      <Routes >
         <Route path="/" element={<HomepageLanding />} />
         <Route path="/FAQs" element={<FAQs />} />
         <Route path="/login" element={<LoginAuth />} />
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/settings" element={<AccountSettings />} />
         <Route path="*" element={<PagenotFound />} />
       </Routes>
+      </div>
       <Footer />
     </div>
   );
