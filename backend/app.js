@@ -34,3 +34,9 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
+
+
+
+// LmbJ4XHNO6Whc2JD
+
+// mongodb+srv://hdushime:<db_password>@auth.9l6j9.mongodb.net/?retryWrites=true&w=majority&appName=Auth
