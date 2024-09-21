@@ -23,7 +23,7 @@ input[type="checkbox"]{
   }
   
 .nav {
-    @apply flex pl-5 items-center gap-2 h-9 hover:bg-gray-400 w-full hover:border-l-4 hover:border-green-600;
+    @apply flex pl-5 py-2 items-center gap-2 h-9 hover:bg-gray-400 w-full hover:border-l-4 hover:border-green-600;
 }
 
 .input_controllers {
