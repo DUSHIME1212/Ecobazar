@@ -2,6 +2,12 @@ const express = require('express');
 const createError = require('http-errors');
 const morgan = require('morgan');
 require('dotenv').config();
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+
 
 const app = express();
 app.use(express.json());
