@@ -1,10 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import { MagnifyingGlass, SlidersHorizontal } from "@phosphor-icons/react";
+import { SlidersHorizontal } from "@phosphor-icons/react";
 import { categoriesShop } from "../../utils/utils";
-import Populartag from "../../components/Blog/Populartag";
-import OurGallery from "../../components/Blog/OurGallery";
-import RecentlyAddedBlog from "../../components/Blog/RecentlyAddedBlog";
 import BlogCard from "../../components/Blog/BlogCard";
 import { useState } from "react";
 import Pagination from "../../components/Blog/Pagination";
