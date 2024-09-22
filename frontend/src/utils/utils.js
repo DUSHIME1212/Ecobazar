@@ -180,3 +180,45 @@ export const faqs = [
     }
   ];
   
+
+  export const categoriesShop = [
+    {
+        type:'Fresh Fruit',
+        number:'(134)'
+    },
+    {
+        type:'Vegetables',
+        number:' (150)'
+    },
+    {
+        type:'Cooking',
+        number:' (54)'
+    },
+    {
+        type:'Snacks',
+        number:' (47)'
+    },
+    {
+        type:'Beverages',
+        number:' (43)'
+    },
+    {
+        type:'Beauty & Health',
+        number:'  (38)'
+    },
+    {
+        type:'Bread & Bakery',
+        number:'  (15)'
+    },
+    {
+        type:'Beverages',
+        number:' (43)'
+    }
+  ]
+
+  export const populartags = [
+    "Healthy","Low fat","Vegetarian","Bread","Kid foods","Vitamins","Snacks","Tiffin","Meat","Launch","Dinner"
+  ]
+  export const gallery = [
+    ''
+  ]

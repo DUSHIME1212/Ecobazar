@@ -8,15 +8,16 @@ const ProcuctsHome = () => {
     justify-center items-center flex-row flex-wrap"
     >
       {[...Products].slice(0, 10).map((item, i) => (
-        <ProductsHolder
-          key={i}
-          imag={item.img}
-          name={item.name}
-          newprise={item.price}
-          oldprise={item.oldprice}
-          rate={item.rate}
-          sale={item.forsale}
-        />
+        <div key={i} className="w-full lg:w-1/5">
+          <ProductsHolder
+            imag={item.img}
+            name={item.name}
+            newprise={item.price}
+            oldprise={item.oldprice}
+            rate={item.rate}
+            sale={item.forsale}
+          />
+        </div>
       ))}
     </div>
   );
