@@ -18,7 +18,7 @@ const BannarHome = () => {
               </h1>
               <p className="text-sm">Free shipping on all your order.</p>
             </div>
-            <button className="px-8 p-4 flex items-center gap-4 size-fit text-green-500 rounded-full">
+            <button className="px-8 p-4 flex items-center gap-4 size-fit bg-transparent text-green-500 rounded-full">
               <span>Shop now</span>
               <ArrowRight size={16} />
             </button>
@@ -34,7 +34,7 @@ const BannarHome = () => {
               <h1 className="text-3xl font-bold">75% OFF</h1>
             </div>
             <p className="text-sm opacity-40">Only Fruit & Vegetable</p>
-            <button className="flex items-center gap-4 size-fit text-green-500">
+            <button className="flex items-center bg-transparent gap-4 size-fit text-green-500">
               <span>Shop now</span>
               <ArrowRight size={16} />
             </button>
@@ -49,7 +49,7 @@ const BannarHome = () => {
             <h1 className="font-bold text-3xl">
               Special Products Deal of the Month
             </h1>
-            <button className="flex items-center gap-4 size-fit text-green-500">
+            <button className="flex items-center bg-transparent gap-4 size-fit text-green-500">
               <span>Shop now</span>
               <ArrowRight size={16} />
             </button>

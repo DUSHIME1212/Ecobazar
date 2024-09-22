@@ -8,10 +8,11 @@ import RecentlyAddedBlog from "../../components/Blog/RecentlyAddedBlog";
 import BlogCard from "../../components/Blog/BlogCard";
 import { useState } from "react";
 import Pagination from "../../components/Blog/Pagination";
+import BlogDetail from "../../components/Blog/Sidebar/BlogDetail";
 
 export default function BlogList() {
   const page = useLocation().pathname.split("/").pop();
-  const blogsPerPage = 5; 
+  const blogsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalBlogs = categoriesShop.length;
   const totalPages = Math.ceil(totalBlogs / blogsPerPage);
@@ -42,7 +43,9 @@ export default function BlogList() {
                 id="fruit"
                 className="p-2 outline-none bg-gray-200 text-sm rounded-xl"
               >
-                <option value="apple" className="px-4">Apple</option>
+                <option value="apple" className="px-4">
+                  Apple
+                </option>
                 {/* Add more options as needed */}
               </select>
             </div>
@@ -54,43 +57,11 @@ export default function BlogList() {
         </div>
         {/* Bottom Section */}
         <div className="flex gap-4">
-          <div className="w-1/3 min-h-96 bg-gray-200 flex flex-col gap-2 p-2 rounded-xl">
-            {/* Side Filters and Categories */}
-            <div className="w-full p-2">
-              <form action="">
-                <label className="flex gap-2 p-2 bg-white rounded-xl items-center">
-                  <MagnifyingGlass size={16} />
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className="bg-transparent outline-none"
-                  />
-                </label>
-              </form>
-            </div>
-            <div className="p-2">
-              <div className="p-2 bg-white rounded-xl">
-                <h1 className="w-full text-lg mb-2 p-2">Top Categories</h1>
-                {categoriesShop.map((item, i) => (
-                  <div key={i} className="flex items-center p-2 justify-between">
-                    <h3>{item.type}</h3>
-                    <span>{item.number}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="p-2 w-full rounded-xl">
-              <Populartag />
-            </div>
-            <div className="p-2 w-full rounded-xl">
-              <OurGallery />
-            </div>
-            <div className="p-2 w-full rounded-xl">
-              <RecentlyAddedBlog />
-            </div>
+          <div className="w-1/3 p-2">
+            <BlogDetail />
           </div>
           <div className="w-2/3 min-h-96 bg-gray-200 flex flex-row flex-wrap gap-4 p-4 rounded-xl">
-            {[...currentBlogs,...currentBlogs].map((item, i) => (
+            {[...currentBlogs, ...currentBlogs].map((item, i) => (
               <BlogCard key={i} />
             ))}
           </div>

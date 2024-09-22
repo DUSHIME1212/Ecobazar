@@ -19,7 +19,7 @@ const SignUp = () => {
     <div className="min-h-[65dvh] w-full flex flex-col  justify-start items-center px-8">
       <Breadcrumbs pageroute={pageid.pathname} />
       <div
-        className="flex flex-col items-center justify-center w-full lg:min-w-[36dvw] bg-white p-8 my-8 py-8 border rounded-xl hover:shadow-xl transition-all duration-300 mi-h-[48dvh]"
+        className="flex flex-col items-center justify-center w-full lg:w-[36dvw] bg-white p-8 my-8 py-8 border rounded-xl hover:shadow-xl transition-all duration-300 mi-h-[48dvh]"
         id="card"
       >
         <h1>Create account</h1>

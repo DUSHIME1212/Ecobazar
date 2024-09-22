@@ -20,7 +20,7 @@ const LatestNewHolder = () => {
                 </div>
             </div>
             <p className="group-hover:text-green-800">Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum.</p>
-            <button className="flex flex-row gap-4 items-center text-green-500 p-2">
+            <button className="flex flex-row gap-4 items-center bg-transparent text-green-500 p-2">
                 <span>Read More</span>
                 <ArrowRight size={24}/>
             </button>

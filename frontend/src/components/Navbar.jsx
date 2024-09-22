@@ -115,7 +115,7 @@ export default function Navbar() {
                 <div className="flex flex-col justify-between bg-white -right-8 md:right-0 rounded-xl shadow-2xl top-16 min-w-96 min-h-[80vh] absolute z-20 p-4">
                   <div className="flex flex-row gap-4 p-2">
                     <img
-                      src="../../public/products/Image-10.png"
+                      src="/products/Image-10.png"
                       className="size-32"
                       alt=""
                     />
@@ -146,6 +146,12 @@ export default function Navbar() {
               <div className="hidden lg:block">
                 <h1 className="text-sm">Shopping cart</h1>
                 <p className="font-bold text-sm">{ price*num} USD</p>
+              </div>
+              <div className="flex items-center gap-2 p-2 ring-1 rounded-xl ring-black">
+                <Link to={'/login'}>Sign Up</Link>
+                <span>/</span>
+                <Link to={'/signup'}>Sign In</Link>
+
               </div>
             </div>
           </div>
