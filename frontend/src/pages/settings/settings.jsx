@@ -126,20 +126,25 @@ function AccountSettings() {
 
           {/* TODO: form manipulation */}
 
-          <div className="flex flex-col p-4 border rounded-md w-[93dvw] lg:w-[73dvw] h-full mt-4">
+          <div className="flex flex-col p-4 border rounded-md w-[93dvw] lg:w-[73dvw] h-[82dvh] my-4">
              <h1>Billing Address</h1>
              <hr className="w-full h-1" />
 
-             <div className="" id="form">
-               <form action="" method="get">
-               <label htmlFor="firstName">First Name</label>
+             <div className="pt-5" id="form">
+               <form action="" method="get" className="flex flex-col space-x-3 space-y-11">
+
+                <div className="flex space-x-3" id="row-1">
+                  <span className="flex flex-col ">
+                  <label htmlFor="firstName">First Name</label>
                   <input
                     type="text"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
                     className="input_controllers"
-                  />
+                  /></span>
+
+                  <span className="flex flex-col">
                   <label htmlFor="lastName">Last Name</label>
                   <input
                     type="text"
@@ -147,12 +152,36 @@ function AccountSettings() {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     className="input_controllers"
-                  />
+                  /></span>
+
+                  <span className="flex flex-col">
                   <label htmlFor="Company">
                     Company Name <small>(Option)</small>
-                    in
+                  
                   </label>
-                  <select id="country" value={selectedCOuntry} onChange={handleCountry}>
+                  <input
+                    type="text"
+                    name="company Name"
+                    placeholder="PixelRwanda"
+                    // value={formData.lastName}
+                    // onChange={handleInputChange}
+                    className="input_controllers"
+                  /></span>
+                  
+                </div>
+               
+                 <span className="w-full m-3">
+                  <label htmlFor="street">Street</label>
+                  <input type="text" name="" id="" className="w-full h-[30px] outline-none border border-solid rounded-md focus:border-2 focus:border-solid focus:border-green-500 placeholder:text-gray-300 pl-2 font-semibold"/>
+                 </span>
+
+
+                  <div className="flex space-x-3" id="row-2">
+                    <span className="flex flex-col">
+                      <label htmlFor="Company">
+                     Country / Region
+                  </label>
+                  <select id="country" value={selectedCOuntry} onChange={handleCountry}  className="input_controllers">
                     <option value="">--please choose an option --</option>
                     {
                       countries.map((country, index) => (
@@ -161,24 +190,42 @@ function AccountSettings() {
                         </option>
                       ))
                     }
-                  </select>
-                      
-                  <label htmlFor="email">Email</label>
+                  </select></span>
+
+                    <span className="flex flex-col">
+                    <label htmlFor="">States</label>
+                   <select name="" className="input_controllers" id="">
+                    <option value="" >washington</option>
+                   </select></span>
+
+                    <span className="flex flex-col">
+                    <label htmlFor="">Zipcode</label>
+                   <input type="number" placeholder="20033"  className="input_controllers"/></span>
+                  </div>
+                 
+                   <div className="flex space-x-3" id="last-row">
+
+                    <span className="flex flex-col">
+                    <label htmlFor="email">Email</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     className="input_controllers"
-                  />
-                  <label htmlFor="phoneNumber">Phone Number</label>
+                  /> </span>
+                    <span className="flex flex-col">
+                    <label htmlFor="phoneNumber">Phone Number</label>
                   <input
                     type="tel"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     className="input_controllers"
-                  />
+                  /></span>
+                  
+                 
+                    </div>   
                   <button
                     type="submit"
                     className=" bg-green-600 text-white  rounded-full w-[180px] h-[38px] text-center"
