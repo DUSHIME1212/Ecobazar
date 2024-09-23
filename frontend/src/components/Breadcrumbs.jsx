@@ -2,7 +2,8 @@ import { CaretRight, House } from "@phosphor-icons/react";
 import PropTypes from "prop-types";
 
 const Breadcrumbs = ({ pageroute }) => {
-  const pageId = pageroute.replace('/','') || 'default';
+  
+  const segments = pageroute.split('/').filter(segment => segment);
 
   return (
     <div
@@ -12,15 +13,20 @@ const Breadcrumbs = ({ pageroute }) => {
       <div className="bg-gradient-to-r absolute top-0 left-0 size-full from-black/70 from-60% to-white/5 z-10" />
       <div className="flex flex-row items-center absolute top-1/2 -translate-y-1/2 gap-2 z-50">
         <House className="" />
-        <CaretRight />
-        <span className="text-sm text-green-500">{pageId}</span>
+        <CaretRight size={12} />
+        {segments.map((segment, index) => (
+          <span key={index} className="flex gap-2 items-center ">
+            <span className="text-sm flex items-center text-green-500">{segment}</span>
+            {index < segments.length - 1 && <CaretRight size={12} />}
+          </span>
+        ))}
       </div>
     </div>
   );
 };
 
 Breadcrumbs.propTypes = {
-  pageroute: PropTypes.object.isRequired, // Change to object to match useParams return type
+  pageroute: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;

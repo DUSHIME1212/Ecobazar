@@ -4,7 +4,7 @@ import OurGallery from "../OurGallery";
 import RecentlyAddedBlog from "../RecentlyAddedBlog";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 
-const BlogDetail = () => {
+const Filter = () => {
   return (
     <div className="w-full min-h-96 flex flex-col gap-2 p-2 rounded-xl">
             {/* Side Filters and Categories */}
@@ -44,4 +44,4 @@ const BlogDetail = () => {
   );
 };
 
-export default BlogDetail;
+export default Filter;

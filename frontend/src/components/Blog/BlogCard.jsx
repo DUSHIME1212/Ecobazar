@@ -32,7 +32,7 @@ const BlogCard = () => {
           Curabitur porttitor orci eget neque accumsan venenatis. Nunc
           fermentum.
         </p>
-        <Link to={""} className="flex gap-2 items-center">
+        <Link to={"/blog/singleblog"} className="flex gap-2 items-center">
           <span>Read more</span>
           <ArrowRight size={12} />
         </Link>

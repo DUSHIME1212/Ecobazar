@@ -5,7 +5,7 @@ import { categoriesShop } from "../../utils/utils";
 import BlogCard from "../../components/Blog/BlogCard";
 import { useState } from "react";
 import Pagination from "../../components/Blog/Pagination";
-import BlogDetail from "../../components/Blog/Sidebar/BlogDetail";
+import Filter from "../../components/Blog/Sidebar/filter";
 
 export default function BlogList() {
   const page = useLocation().pathname.split("/").pop();
@@ -55,7 +55,7 @@ export default function BlogList() {
         {/* Bottom Section */}
         <div className="flex gap-4">
           <div className="w-1/3 p-2">
-            <BlogDetail />
+            <Filter />
           </div>
           <div className="w-2/3 min-h-96 bg-green-200 flex flex-row flex-wrap gap-4 p-4 rounded-xl">
             {[...currentBlogs, ...currentBlogs].map((item, i) => (

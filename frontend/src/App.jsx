@@ -9,6 +9,7 @@ import SignUp from "./pages/settings/signIn.jsx";
 import DashBoard from "./pages/settings/DashBoard.jsx";
 import AccountSettings from "./pages/settings/settings.jsx";
 import BlogList from "./pages/Blog/BlogList.jsx";
+import SingleBlog from "./sections/Blog/SingleBlog.jsx";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/login" element={<LoginAuth />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:singleblog" element={<SingleBlog />} />
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/settings" element={<AccountSettings />} />
           <Route path="*" element={<PagenotFound />} />
