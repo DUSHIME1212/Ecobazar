@@ -38,7 +38,7 @@ export default function BlogList() {
               <select
                 name="Fruit"
                 id="fruit"
-                className="p-2 outline-none bg-gray-200 text-sm rounded-xl"
+                className="p-2 outline-none bg-green-200 text-sm rounded-xl"
               >
                 <option value="apple" className="px-4">
                   Apple
@@ -57,7 +57,7 @@ export default function BlogList() {
           <div className="w-1/3 p-2">
             <BlogDetail />
           </div>
-          <div className="w-2/3 min-h-96 bg-gray-200 flex flex-row flex-wrap gap-4 p-4 rounded-xl">
+          <div className="w-2/3 min-h-96 bg-green-200 flex flex-row flex-wrap gap-4 p-4 rounded-xl">
             {[...currentBlogs, ...currentBlogs].map((item, i) => (
               <BlogCard key={i} />
             ))}
