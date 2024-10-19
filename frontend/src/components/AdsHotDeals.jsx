@@ -1,8 +1,8 @@
 const AdsHotDeals = () => {
   return (
-    <div className="w-full flex gap-4 my-8">
+    <div className="w-full flex flex-col lg:flex-row gap-4 my-8">
       <div
-        className="w-1/3 min-h-[512px] rounded-3xl object-cover"
+        className="w-full lg:w-1/3 min-h-[512px] rounded-3xl object-cover"
         style={{ backgroundImage: `url('/timestamp/Rectangle 54.png')` }}
       >
         <div className="flex flex-col text-white gap-4 items-center h-full p-4">
@@ -32,7 +32,7 @@ const AdsHotDeals = () => {
         </div>
       </div>
       <div
-        className="w-1/3 min-h-[512px] rounded-3xl object-cover"
+        className="w-full lg:w-1/3  min-h-[512px] rounded-3xl object-cover"
         style={{ backgroundImage: `url('/timestamp/Rectangle 54 (1).png')` }}
       >
         <div className="flex justify-center items-center flex-col gap-4 p-4 text-white">
@@ -45,7 +45,7 @@ const AdsHotDeals = () => {
         </div>
       </div>
       <div
-        className="w-1/3 min-h-[512px] rounded-3xl object-cover"
+        className="w-full lg:w-1/3  min-h-[512px] rounded-3xl object-cover"
         style={{ backgroundImage: `url('/timestamp/Rectangle 54 (2).png')` }}
       >
         <div className="flex justify-center items-center flex-col gap-4 p-4 text-black">

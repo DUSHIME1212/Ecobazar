@@ -2,7 +2,7 @@ import { Quotes, Star } from "@phosphor-icons/react";
 
 const TestimonialCard = () => {
   return (
-    <div className="w-1/3 flex flex-col group hover:shadow-xl rounded-xl hover:text-white cursor-pointer hover:bg-green-500 gap-4 py-8 duration-700 p-4">
+    <div className="w-full lg:w-1/3 flex flex-col group hover:shadow-xl rounded-xl hover:text-white cursor-pointer hover:bg-green-500 gap-4 py-8 duration-700 p-4">
       <Quotes weight="fill" size={18} />
       <p className="text-sm">
         Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.

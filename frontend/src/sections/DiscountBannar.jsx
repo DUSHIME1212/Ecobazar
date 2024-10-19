@@ -8,7 +8,7 @@ const DiscountBannar = () => {
             <h2>Summer Sale</h2>
             <h1 className="text-5xl"><span className="text-orange-500">37%</span> OFF</h1>
             <p>Free on all your order, Free Shipping and  30 days money-back guarantee</p>
-            <button className="flex flex-row gap-2 p-3 size-fit rounded-xl px-4 text-white bg-green-500">
+            <button className="flex flex-row gap-2 p-3 size-fit rounded-xl px-4 text-white items-center bg-green-500">
                 <span>Shop Now</span>
                 <ArrowRight size={18}/>
             </button>
