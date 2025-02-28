@@ -6,7 +6,7 @@ import LoginAuth from "./pages/settings/login.jsx";
 import PagenotFound from "./pages/PagenotFound.jsx";
 import FAQs from "./pages/FAQs.jsx";
 import SignUp from "./pages/settings/signIn.jsx";
-import Shop from "./pages/shop.jsx";
+import Shop from "../public/shop.jsx";
 import DashBoard from "./pages/settings/DashBoard.jsx";
 import AccountSettings from "./pages/settings/settings.jsx";
 import BlogList from "./pages/Blog/BlogList.jsx";
