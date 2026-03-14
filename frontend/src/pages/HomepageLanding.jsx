@@ -22,7 +22,7 @@ const HomepageLanding = () => {
       {/* Categories */}
       <div className="px-8 md:px-16 lg:px-32">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Popular Categories</h1>
+          <h1 className="text-3xl font-medium">Popular Categories</h1>
           <div className="flex gap-2 items-center text-green-500 underline cursor-pointer">
             <span>Show all</span>
             <ArrowRight size={16} />
@@ -55,7 +55,7 @@ const HomepageLanding = () => {
         <TestimonialsHome />
       </div>
       <div className="px-8 md:px-16 lg:px-32">
-        <CompanyLogo/>
+        <CompanyLogo />
       </div>
     </div>
   );

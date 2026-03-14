@@ -1,32 +1,64 @@
-import { ArrowRight, ChatCentered, Tag, User } from "@phosphor-icons/react"
+import { ArrowRight, MessageCircle, User, Tag } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const LatestNewHolder = () => {
   return (
-    <div className="w-full lg:w-1/3 min-h-96 group relative p-2 flex flex-col gap-4 hover:shadow-md duration-700 rounded-xl">
-        <img src="/news/Image.png" alt="img" className="w-full rounded-xl" />
-        <div className="w-full p-4 flex flex-col gap-2">
-            <div className="flex flex-row gap-2">
-                <div className="flex items-center gap-2 p-2 w-fit">
-                    <span><Tag className="opacity-60"/></span>
-                    <span>Food</span>
-                </div>
-                <div className="flex items-center gap-2 p-2 w-fit">
-                    <span><User className="opacity-60"/></span>
-                    <span>By Admin</span>
-                </div>
-                <div className="flex items-center gap-2 p-2 w-fit">
-                    <span><ChatCentered className="opacity-60"/></span>
-                    <span>65 Comments</span>
-                </div>
-            </div>
-            <p className="group-hover:text-green-800">Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum.</p>
-            <button className="flex flex-row gap-4 items-center bg-transparent text-green-500 p-2">
-                <span>Read More</span>
-                <ArrowRight size={24}/>
-            </button>
+    <div className="w-full lg:w-1/3 group bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500 flex flex-col">
+      <div className="relative overflow-hidden h-64">
+        <img
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop"
+          alt="Latest News"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-3 flex flex-col items-center min-w-14 shadow-sm">
+          <span className="text-xl font-black text-gray-900 leading-none">
+            18
+          </span>
+          <span className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mt-1">
+            Nov
+          </span>
         </div>
-    </div>
-  )
-}
+      </div>
 
-export default LatestNewHolder
+      <div className="p-8 flex flex-col flex-1 gap-6">
+        <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex items-center gap-2 text-gray-400 font-medium text-xs uppercase tracking-widest hover:text-green-600 cursor-pointer transition-colors">
+            <Tag size={14} className="text-green-500" />
+            <span>Food</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 font-medium text-xs uppercase tracking-widest">
+            <User size={14} className="text-green-500" />
+            <span>By Admin</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-400 font-medium text-xs uppercase tracking-widest">
+            <MessageCircle size={14} className="text-green-500" />
+            <span>65 Comments</span>
+          </div>
+        </div>
+
+        <h3 className="text-xl font-black text-gray-900 group-hover:text-green-600 transition-colors leading-tight">
+          Curabitur porttitor orci eget neque accumsan venenatis. Nunc
+          fermentum.
+        </h3>
+
+        <div className="mt-auto">
+          <Link to="/blog/singleblog">
+            <Button
+              variant="link"
+              className="p-0 h-auto text-green-600 hover:text-green-700 font-black flex items-center gap-2 group/btn"
+            >
+              <span>Read More</span>
+              <ArrowRight
+                size={18}
+                className="group-hover/btn:translate-x-1 transition-transform"
+              />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LatestNewHolder;

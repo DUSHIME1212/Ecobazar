@@ -1,28 +1,46 @@
-import { MdDashboard } from "react-icons/md";
-import { GrCycle } from "react-icons/gr";
+import { MdDashboard, MdHistory, MdSettings, MdLogout } from "react-icons/md";
 import { GoHeart } from "react-icons/go";
 import { BsHandbag } from "react-icons/bs";
-import { IoSettingsOutline } from "react-icons/io5";
-import { CiLogin } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
 
 function SideBar() {
-    return (
-       <div className="flex flex-col h-[52dvh] w-full lg:min-w-[15dvw] rounded-md border border-solid  p-8 relative">
-          <p className="pl-5 relative top-3 text-black font-semibold ">
-            Navigation
-          </p>
-          <span className="flex flex-col justify-between pt-4">
-              <ul className="text-xl text-black space-y-1 ">
-                <li className="nav"><MdDashboard /> Dashboard</li>
-                <li className="nav"><GrCycle /> Order</li>
-                <li className="nav"><GoHeart /> Wish</li>
-                <li className="nav"><BsHandbag /> Shopping cart</li>
-                <li className="nav"><IoSettingsOutline /> Settings</li>
-                <li className="nav"><CiLogin /> Log out</li>
-              </ul>
-          </span>
-       </div>
-    )
+  const navItems = [
+    { name: "Dashboard", path: "/dashboard", icon: <MdDashboard /> },
+    { name: "Order History", path: "/order-history", icon: <MdHistory /> },
+    { name: "Wishlist", path: "/wishlist", icon: <GoHeart /> },
+    { name: "Shopping Cart", path: "/cart", icon: <BsHandbag /> },
+    { name: "Settings", path: "/settings", icon: <MdSettings /> },
+    { name: "Log-out", path: "/logout", icon: <MdLogout /> },
+  ];
+
+  return (
+    <div className="flex flex-col rounded-lg border border-gray-200 overflow-hidden">
+      <div className="p-6">
+        <h2 className="text-xl font-semibold mb-4">Navigation</h2>
+        <nav>
+          <ul className="space-y-1">
+            {navItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-3 text-lg transition-colors border-l-4 ${
+                      isActive
+                        ? "bg-gray-50 text-black border-green-500 font-medium"
+                        : "text-gray-600 border-transparent hover:bg-gray-50 hover:text-black"
+                    }`
+                  }
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
 }
 
-export default SideBar
+export default SideBar;

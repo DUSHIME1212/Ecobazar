@@ -9,7 +9,7 @@ const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
           {sale}
         </span>
       ) : (
-        <span className='p-1 mt-6'></span>
+        <span className="p-1 mt-6"></span>
       )}
       <img src={imag} alt={name} className="w-full h-40 object-contain" />
       <div className="absolute hidden group-hover:flex flex-col gap-2 duration-700 right-4 top-4">
@@ -22,7 +22,7 @@ const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
       </div>
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-lg font-bold">{name}</h2>
+          <h2 className="text-lg font-medium">{name}</h2>
           <div className="flex items-center gap-2 text-sm">
             <h1 className="text-xl">{newprise}</h1>
             <h2 className="line-through opacity-40">{oldprise}</h2>
