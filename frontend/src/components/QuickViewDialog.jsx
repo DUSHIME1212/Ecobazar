@@ -12,8 +12,12 @@ import {
   Youtube,
 } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 function QuickViewDialog({ product, open, onOpenChange }) {
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -151,11 +155,17 @@ function QuickViewDialog({ product, open, onOpenChange }) {
                   <Plus size={16} />
                 </button>
               </div>
-              <Button className="flex-1 w-full bg-green-600 hover:bg-green-700 rounded-full h-12 font-medium text-white shadow-lg shadow-green-100">
+              <Button 
+                onClick={() => addToCart(product, quantity)}
+                className="flex-1 w-full bg-green-600 hover:bg-green-700 rounded-full h-12 font-medium text-white shadow-lg shadow-green-100"
+              >
                 Add To Cart <ShoppingCart size={20} className="ml-2" />
               </Button>
-              <button className="w-12 h-12 rounded-full flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition-all">
-                <Heart size={20} />
+              <button 
+                onClick={() => toggleWishlist(product)}
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${isInWishlist(product?.id) ? "bg-green-600 text-white" : "bg-green-50 text-green-600 hover:bg-green-100"}`}
+              >
+                <Heart size={20} fill={isInWishlist(product?.id) ? "white" : "none"} />
               </button>
             </div>
 

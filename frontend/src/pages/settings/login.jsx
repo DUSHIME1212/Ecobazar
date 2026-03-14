@@ -1,17 +1,34 @@
 import { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { useAuth } from '../../context/AuthContext';
 
 function LoginAuth() {
   const pageid = useLocation();
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [seePassword, setSeePassword] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    const result = await login(email, password);
+    if (result.success) {
+      navigate('/dashboard');
+    } else {
+      setError(result.message);
+    }
+    setLoading(false);
+  }
 
   function handleSee() {
     setSeePassword((prev) => !prev);
-    console.log(password,email)
   }
 
   return (
@@ -23,7 +40,8 @@ function LoginAuth() {
         id="card"
       >
         <h1>Sign In</h1>
-        <form className="flex flex-col items-center size-full p-4 space-y-3">
+        <form onSubmit={handleLogin} className="flex flex-col items-center size-full p-4 space-y-3">
+          {error && <p className="text-red-500 text-sm w-full font-medium">{error}</p>}
           <label htmlFor="email" className="relative w-full">
             <input
               type="email"
@@ -33,6 +51,7 @@ function LoginAuth() {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </label>
           <label htmlFor="password" className="relative w-full">
@@ -44,6 +63,7 @@ function LoginAuth() {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <button
               type="button"
@@ -62,8 +82,12 @@ function LoginAuth() {
               Forgot Password?
             </a>
           </span>
-          <button className="p-2 text-sm w-full rounded-full bg-[#00b207] bg-opacity-70 hover:bg-opacity-100 duration-700 text-white">
-            Sign In
+          <button 
+            type="submit"
+            disabled={loading}
+            className={`p-2 text-sm w-full rounded-full bg-[#00b207] ${loading ? 'opacity-50' : 'bg-opacity-70 hover:bg-opacity-100'} duration-700 text-white`}
+          >
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
           <h3 className="text-sm opacity-100">
             Don&apos;t have an account?{" "}

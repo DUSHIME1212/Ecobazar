@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,84 +14,67 @@ import {
   Instagram,
   Youtube,
   PlayCircle,
+  Loader2,
 } from "lucide-react";
-
-const products = [
-  {
-    id: 6,
-    name: "Green Apple",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-    oldPrice: 20.99,
-    isSale: true,
-  },
-  {
-    id: 2,
-    name: "Chanisa Cabbage",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1590411641322-076f7df12613?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 7,
-    name: "Green Capsicum",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 11,
-    name: "Ladies Finger",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1449339044511-d14d2325ae1b?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-];
+import { productAPI } from "../services/api";
+import ProductsHolder from "../components/ProductsHolder";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 function ProductDetails() {
+  const { id } = useParams();
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
-  const images = [
-    "https://images.unsplash.com/photo-1590411641322-076f7df12613?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1566270832367-e95e4e73d328?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?q=80&w=800&auto=format&fit=crop",
-  ];
+  useEffect(() => {
+    const fetchProduct = async () => {
+      setLoading(true);
+      try {
+        const data = await productAPI.getById(id);
+        setProduct(data);
+        // Fetch related products (e.g., from the same category)
+        if (data.category?.id) {
+          const related = await productAPI.getAll({
+            category: data.category.id,
+            limit: 4
+          });
+          setRelatedProducts(related.filter(p => p.id !== id));
+        }
+      } catch (error) {
+        console.error("Failed to fetch product", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-  const reviews = [
-    {
-      name: "Kristin Watson",
-      rating: 5,
-      date: "2 min ago",
-      comment: "Duis at ullamcorper nulla, eu dictum eros.",
-    },
-    {
-      name: "Jane Cooper",
-      rating: 4,
-      date: "30 Apr, 2021",
-      comment:
-        "Keep the soil evenly moist for the healthiest growth. If the sun gets too hot, Chinese cabbage tends to 'bolt', or go to seed. In long periods of heat, some kind of shade may be helpful. Watch out for snails, as they will harm the plants.",
-    },
-    {
-      name: "Jacob Jones",
-      rating: 5,
-      date: "2 min ago",
-      comment:
-        "Vivamus eget euismod magna. Nam sed lacinia nibh, et lacinia lacus.",
-    },
-    {
-      name: "Ralph Edwards",
-      rating: 5,
-      date: "2 min ago",
-      comment:
-        "200+ Canton Pak Choi Bok Choy Chinese Cabbage Seeds Heirloom Non-GMO Productive Brassica rapa VAR. chinensis, a.k.a. Canton's Choice, Bok Choy, from USA",
-    },
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-10 h-10 animate-spin text-green-600" />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="container mx-auto px-24 py-16 text-center">
+        <h2 className="text-2xl font-medium text-gray-900">Product Not Found</h2>
+        <Link to="/shop" className="text-green-600 hover:underline mt-4 inline-block">
+          Back to Shop
+        </Link>
+      </div>
+    );
+  }
+
+  const images = product.images.length > 0 ? product.images : [
+    "https://images.unsplash.com/photo-1590411641322-076f7df12613?q=80&w=800&auto=format&fit=crop"
   ];
 
   return (
@@ -106,11 +89,14 @@ function ProductDetails() {
           Category
         </Link>
         <span>&gt;</span>
-        <Link to="/shop" className="hover:text-green-600 transition-colors">
-          Vegetables
+        <Link
+          to={`/shop?category=${product.category?.name}`}
+          className="hover:text-green-600 transition-colors"
+        >
+          {product.category?.name || "Uncategorized"}
         </Link>
         <span>&gt;</span>
-        <span className="text-gray-900">Chinese Cabbage</span>
+        <span className="text-gray-900">{product.name}</span>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8 mb-16">
@@ -145,10 +131,10 @@ function ProductDetails() {
           <div className="space-y-2">
             <div className="flex items-center gap-3">
               <h1 className="text-4xl font-medium text-gray-900">
-                Chinese Cabbage
+                {product.name}
               </h1>
-              <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none px-3 font-semibold">
-                In Stock
+              <Badge className={`${product.stock > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} hover:bg-opacity-80 border-none px-3 font-semibold`}>
+                {product.stock > 0 ? "In Stock" : "Out of Stock"}
               </Badge>
             </div>
             <div className="flex items-center gap-4 text-sm mt-2">
@@ -157,33 +143,37 @@ function ProductDetails() {
                   <Star
                     key={i}
                     size={16}
-                    fill={i < 4 ? "currentColor" : "none"}
-                    className={i < 4 ? "" : "text-gray-200"}
+                    fill={i < Math.floor(product.rating || 0) ? "currentColor" : "none"}
+                    className={i < Math.floor(product.rating || 0) ? "" : "text-gray-200"}
                   />
                 ))}
               </div>
               <span className="text-gray-500 font-medium whitespace-nowrap">
-                4 Review
+                {product.reviews?.length || 0} Review
               </span>
               <span className="text-gray-300">|</span>
               <span className="text-gray-700 whitespace-nowrap uppercase tracking-wider text-xs">
-                SKU: <span className="font-medium text-gray-900">2,51,594</span>
+                SKU: <span className="font-medium text-gray-900">{product.id.slice(-6).toUpperCase()}</span>
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-4 border-b border-gray-100 pb-6">
             <div className="flex items-center gap-2">
-              <span className="text-gray-300 line-through text-2xl font-medium">
-                $48.00
-              </span>
+              {product.oldPrice && (
+                <span className="text-gray-300 line-through text-2xl font-medium">
+                  ${product.oldPrice}
+                </span>
+              )}
               <span className="text-3xl font-medium text-green-600">
-                $17.28
+                ${product.price}
               </span>
             </div>
-            <Badge className="bg-red-50 text-red-600 border-none font-medium text-xs uppercase px-2 py-1">
-              64% Off
-            </Badge>
+            {product.oldPrice && (
+              <Badge className="bg-red-50 text-red-600 border-none font-medium text-xs uppercase px-2 py-1">
+                {Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}% Off
+              </Badge>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4">
@@ -213,9 +203,7 @@ function ProductDetails() {
           </div>
 
           <p className="text-gray-500 text-base leading-relaxed">
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec,
-            ultrices et ipsum. Nulla varius magna a consequat pulvinar.
+            {product.description}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 py-6 border-b border-t border-gray-100">
@@ -236,11 +224,17 @@ function ProductDetails() {
                 <Plus size={20} />
               </button>
             </div>
-            <Button className="flex-1 w-full bg-green-600 hover:bg-green-700 rounded-full h-14 font-medium text-lg text-white shadow-xl shadow-green-100">
+            <Button 
+              onClick={() => addToCart(product, quantity)}
+              className="flex-1 w-full bg-green-600 hover:bg-green-700 rounded-full h-14 font-medium text-lg text-white shadow-xl shadow-green-100"
+            >
               Add To Cart <ShoppingCart size={24} className="ml-2" />
             </Button>
-            <button className="w-14 h-14 rounded-full flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition-all border border-green-100">
-              <Heart size={24} />
+            <button 
+              onClick={() => toggleWishlist(product)}
+              className={`w-14 h-14 rounded-full flex items-center justify-center transition-all border ${isInWishlist(product?.id) ? "bg-green-600 text-white border-green-600" : "bg-green-50 text-green-600 border-green-100 hover:bg-green-100"}`}
+            >
+              <Heart size={24} fill={isInWishlist(product?.id) ? "white" : "none"} />
             </button>
           </div>
 
@@ -249,7 +243,7 @@ function ProductDetails() {
               <span className="text-gray-900 font-medium uppercase tracking-wider text-xs">
                 Category:
               </span>{" "}
-              <span className="text-gray-500 ml-2">Vegetables</span>
+              <span className="text-gray-500 ml-2">{product.category?.name || "Other"}</span>
             </div>
             <div className="text-sm">
               <span className="text-gray-900 font-medium uppercase tracking-wider text-xs">
@@ -420,7 +414,7 @@ function ProductDetails() {
               </Button>
             </div>
             <div className="divide-y divide-gray-100">
-              {reviews.map((review, idx) => (
+              {(product.reviews || []).map((review, idx) => (
                 <div key={idx} className="py-8 first:pt-0 last:pb-0">
                   <div className="flex justify-between mb-2">
                     <div className="flex items-center gap-4">
@@ -475,52 +469,17 @@ function ProductDetails() {
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div
+          {relatedProducts.map((product) => (
+            <ProductsHolder
               key={product.id}
-              className="group relative border border-gray-100 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 bg-white"
-            >
-              <div className="aspect-square relative overflow-hidden bg-gray-50">
-                <img
-                  src={product.image}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  alt={product.name}
-                />
-                <div className="absolute top-4 right-4 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                  <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-700 hover:bg-green-600 hover:text-white transition-colors shadow-lg">
-                    <Heart size={18} />
-                  </button>
-                </div>
-              </div>
-              <div className="p-4 space-y-2">
-                <div className="flex justify-between items-center text-sm">
-                  <h3 className="text-gray-700 font-medium group-hover:text-green-600 transition-colors">
-                    {product.name}
-                  </h3>
-                  <div className="flex text-orange-400">
-                    <Star size={12} fill="currentColor" />
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900 font-mono tracking-tighter">
-                    ${product.price}
-                  </span>
-                  {product.oldPrice && (
-                    <span className="text-gray-400 line-through text-xs font-mono tracking-tighter">
-                      ${product.oldPrice}
-                    </span>
-                  )}
-                </div>
-                <button className="absolute bottom-4 right-4 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-700 hover:bg-green-600 hover:text-white transition-all shadow-sm">
-                  <ShoppingCart size={18} />
-                </button>
-              </div>
-              {product.isSale && (
-                <Badge className="absolute top-4 left-4 bg-red-500 text-white font-medium px-2 py-1 text-[10px]">
-                  Sale 50%
-                </Badge>
-              )}
-            </div>
+              id={product.id}
+              imag={product.image}
+              name={product.name}
+              newprise={product.price}
+              oldprise={product.oldPrice}
+              rate={product.rating}
+              sale={product.isSale}
+            />
           ))}
         </div>
       </section>

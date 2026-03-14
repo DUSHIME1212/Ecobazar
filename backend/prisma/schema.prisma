@@ -6,28 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
-enum OrderStatus {
-  PENDING
-  PROCESSING
-  SHIPPED
-  DELIVERED
-  CANCELLED
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(uuid())
   email     String    @unique
   name      String?
   password  String
-  role      Role      @default(USER)
+  role      String    @default("USER")
   addresses Address[]
   reviews   Review[]
   orders    Order[]
@@ -36,19 +24,19 @@ model User {
 }
 
 model Address {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String  @id @default(uuid())
   street     String
   city       String
   state      String
   zip        String
   country    String
   isDefault  Boolean @default(false)
-  userId     String  @db.ObjectId
+  userId     String
   user       User    @relation(fields: [userId], references: [id])
 }
 
 model Category {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(uuid())
   name      String    @unique
   products  Product[]
   createdAt DateTime  @default(now())
@@ -56,15 +44,15 @@ model Category {
 }
 
 model Product {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  id          String      @id @default(uuid())
   name        String
   description String
   price       Float
   oldPrice    Float?
-  images      String[]
+  images      String      @default("[]") // Using String for SQLite, stored as JSON string
   stock       Int         @default(0)
   rating      Float       @default(0)
-  categoryId  String      @db.ObjectId
+  categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
   reviews     Review[]
   orderItems  OrderItem[]
@@ -73,22 +61,22 @@ model Product {
 }
 
 model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   rating    Int
   comment   String
-  userId    String   @db.ObjectId
+  userId    String
   user      User     @relation(fields: [userId], references: [id])
-  productId String   @db.ObjectId
+  productId String
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Order {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  id        String      @id @default(uuid())
   total     Float
-  status    OrderStatus @default(PENDING)
-  userId    String      @db.ObjectId
+  status    String      @default("PENDING")
+  userId    String
   user      User        @relation(fields: [userId], references: [id])
   items     OrderItem[]
   createdAt DateTime    @default(now())
@@ -96,11 +84,11 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id        String  @id @default(uuid())
   quantity  Int
   price     Float
-  orderId   String  @db.ObjectId
+  orderId   String
   order     Order   @relation(fields: [orderId], references: [id])
-  productId String  @db.ObjectId
+  productId String
   product   Product @relation(fields: [productId], references: [id])
 }

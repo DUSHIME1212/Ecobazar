@@ -1,45 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { X, Minus, Plus, ShoppingCart, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { X, Minus, Plus } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 export default function ShoppingCartPage() {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Green Capsicum",
-      price: 14.0,
-      quantity: 5,
-      weight: "1 kg",
-      image:
-        "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=200&auto=format&fit=crop",
-    },
-    {
-      id: 2,
-      name: "Red Capsicum",
-      price: 14.0,
-      quantity: 1,
-      weight: "1 kg",
-      image:
-        "https://images.unsplash.com/photo-1589412227349-33166bff3bb0?q=80&w=200&auto=format&fit=crop",
-    },
-  ]);
-
-  const updateQuantity = (id, delta) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item,
-      ),
-    );
-  };
-
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
+  const { cartItems, updateQuantity, removeFromCart, subtotal, clearCart } = useCart();
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -72,57 +37,68 @@ export default function ShoppingCartPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
-                  {cartItems.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="group hover:bg-gray-50/30 transition-colors"
-                    >
-                      <td className="px-8 py-6">
-                        <div className="flex items-center gap-6">
-                          <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 border border-gray-100 flex-shrink-0">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
-                          <span className="font-medium text-gray-900 text-lg">
-                            {item.name}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-8 py-6 font-medium text-gray-900">
-                        ${item.price.toFixed(2)}
-                      </td>
-                      <td className="px-8 py-6">
-                        <div className="flex items-center bg-gray-50 border border-gray-200 rounded-full p-1 w-fit mx-auto">
-                          <button
-                            onClick={() => updateQuantity(item.id, -1)}
-                            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-all text-gray-600"
-                          >
-                            <Minus size={16} />
-                          </button>
-                          <span className="w-10 text-center font-medium">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.id, 1)}
-                            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-all text-gray-600"
-                          >
-                            <Plus size={16} />
-                          </button>
-                        </div>
-                      </td>
-                      <td className="px-8 py-6 font-medium text-gray-900">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </td>
-                      <td className="px-8 py-6 text-right">
-                        <button className="w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all border border-gray-100">
-                          <X size={18} />
-                        </button>
+                  {cartItems.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" className="px-8 py-20 text-center text-gray-400">
+                        Your cart is empty.
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    cartItems.map((item) => (
+                      <tr
+                        key={item.id}
+                        className="group hover:bg-gray-50/30 transition-colors"
+                      >
+                        <td className="px-8 py-6">
+                          <div className="flex items-center gap-6">
+                            <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 border border-gray-100 flex-shrink-0">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            </div>
+                            <span className="font-medium text-gray-900 text-lg">
+                              {item.name}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-8 py-6 font-medium text-gray-900">
+                          ${item.price.toFixed(2)}
+                        </td>
+                        <td className="px-8 py-6">
+                          <div className="flex items-center bg-gray-50 border border-gray-200 rounded-full p-1 w-fit mx-auto">
+                            <button
+                              onClick={() => updateQuantity(item.id, -1)}
+                              className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-all text-gray-600"
+                            >
+                              <Minus size={16} />
+                            </button>
+                            <span className="w-10 text-center font-medium">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => updateQuantity(item.id, 1)}
+                              className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-all text-gray-600"
+                            >
+                              <Plus size={16} />
+                            </button>
+                          </div>
+                        </td>
+                        <td className="px-8 py-6 font-medium text-gray-900">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </td>
+                        <td className="px-8 py-6 text-right">
+                          <button 
+                            onClick={() => removeFromCart(item.id)}
+                            className="w-10 h-10 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all border border-gray-100"
+                          >
+                            <X size={18} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
@@ -136,8 +112,11 @@ export default function ShoppingCartPage() {
                   Return to shop
                 </Button>
               </Link>
-              <Button className="rounded-full px-8 h-12 font-medium bg-gray-100 hover:bg-gray-200 text-gray-900 border-none">
-                Update Cart
+               <Button 
+                onClick={clearCart}
+                className="rounded-full px-8 h-12 font-medium bg-gray-100 hover:bg-gray-200 text-gray-900 border-none"
+              >
+                Clear Cart
               </Button>
             </div>
           </div>

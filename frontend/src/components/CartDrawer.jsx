@@ -8,33 +8,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, X, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
 
 export default function CartDrawer({ children }) {
-  const cartItems = [
-    {
-      id: 1,
-      name: "Fresh Indian Orange",
-      price: 12.0,
-      quantity: 1,
-      weight: "1 kg",
-      image:
-        "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=200&auto=format&fit=crop",
-    },
-    {
-      id: 2,
-      name: "Green Apple",
-      price: 14.0,
-      quantity: 1,
-      weight: "1 kg",
-      image:
-        "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=200&auto=format&fit=crop",
-    },
-  ];
-
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
+  const { cartItems, subtotal, removeFromCart } = useCart();
 
   return (
     <Sheet className="bg-white">
@@ -78,7 +55,10 @@ export default function CartDrawer({ children }) {
                   </span>
                 </p>
               </div>
-              <button className="w-8 h-8 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all self-center border border-gray-100">
+              <button 
+                onClick={() => removeFromCart(item.id)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all self-center border border-gray-100"
+              >
                 <X size={16} />
               </button>
             </div>

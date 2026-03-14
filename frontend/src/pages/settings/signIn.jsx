@@ -1,18 +1,39 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
+import { useAuth } from "../../context/AuthContext";
 
 const SignUp = () => {
   const pageid = useLocation();
-  const [seePassword, Setseepassword] = useState(0);
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const navigate = useNavigate();
+  const { signup } = useAuth();
+  const [seePassword, setSeePassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignup(e) {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      return setError("Passwords do not match");
+    }
+    setError("");
+    setLoading(true);
+    const result = await signup({ email, password });
+    if (result.success) {
+      navigate('/login');
+    } else {
+      setError(result.message);
+    }
+    setLoading(false);
+  }
 
   function handleSee(e) {
     e.preventDefault();
-    Setseepassword((prev) => !prev);
-    console.log(pageid);
+    setSeePassword((prev) => !prev);
   }
 
   return (
@@ -24,14 +45,16 @@ const SignUp = () => {
           id="card"
         >
           <h1>Create account</h1>
-          <form className="flex flex-col items-center size-full p-4 space-y-3">
+          <form onSubmit={handleSignup} className="flex flex-col items-center size-full p-4 space-y-3">
+            {error && <p className="text-red-500 text-sm w-full font-medium">{error}</p>}
             <label htmlFor="" className="relative w-full">
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setemail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+                required
               />
             </label>
             <label htmlFor="" className="relative w-full">
@@ -39,10 +62,12 @@ const SignUp = () => {
                 type={seePassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setpassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+                required
               />
               <button
+                type="button"
                 onClick={handleSee}
                 className="absolute top-1/2 -translate-y-1/2 right-2"
               >
@@ -53,16 +78,11 @@ const SignUp = () => {
               <input
                 type={seePassword ? "text" : "password"}
                 placeholder="Confirm Password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="border-2 border-gray-300 w-full focus:border-green-500 h-[4dvh] p-4 text-sm rounded-md outline-none"
+                required
               />
-              <button
-                onClick={handleSee}
-                className="absolute top-1/2 -translate-y-1/2 right-2"
-              >
-                {seePassword ? <Eye size={16} /> : <EyeSlash size={16} />}
-              </button>
             </label>
             <span className="flex items-center gap-4 py-2 w-full justify-between space-x-4 ">
               <label htmlFor="rem" className="flex items-center gap-2">
@@ -73,8 +93,12 @@ const SignUp = () => {
                 Forgot Password?
               </a>
             </span>
-            <button className="p-2 text-sm w-full rounded-full bg-[#00b207] bg-opacity-70 hover:bg-opacity-100 duration-700 text-white">
-              Create account
+            <button 
+              type="submit"
+              disabled={loading}
+              className={`p-2 text-sm w-full rounded-full bg-[#00b207] ${loading ? 'opacity-50' : 'bg-opacity-70 hover:bg-opacity-100'} duration-700 text-white`}
+            >
+              {loading ? 'Creating account...' : 'Create account'}
             </button>
             <h3 className="text-sm opacity-100">
               if you have an account?{" "}

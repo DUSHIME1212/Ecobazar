@@ -1,11 +1,13 @@
-import { Eye, Heart, ShoppingBag, Star } from "lucide-react";
+import { Eye, Heart, ShoppingBag, Star, Loader2 } from "lucide-react";
 import ProductsHolder from "../components/ProductsHolder";
-import { Products } from "../utils/utils";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { productAPI } from "../services/api";
 
 const HotDeals = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -14,8 +16,20 @@ const HotDeals = () => {
   });
 
   useEffect(() => {
+    const fetchDeals = async () => {
+      try {
+        const data = await productAPI.getAll({ limit: 13 });
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to fetch hot deals", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDeals();
+
     const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 15); // 15 days from now
+    targetDate.setDate(targetDate.getDate() + 15);
 
     const timer = setInterval(() => {
       const now = new Date();
@@ -36,7 +50,16 @@ const HotDeals = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const featureProduct = Products[0];
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center py-20 min-h-[512px]">
+        <Loader2 className="w-10 h-10 animate-spin text-green-600" />
+      </div>
+    );
+  }
+
+  const featureProduct = products[0] || {};
+  const otherDeals = products.slice(1, 13);
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-8 min-h-[720px]">
@@ -57,9 +80,9 @@ const HotDeals = () => {
             </button>
           </div>
 
-          <Link to="/product/1" className="relative flex-1 py-8 block">
+          <Link to={`/product/${featureProduct.id}`} className="relative flex-1 py-8 block">
             <img
-              src={featureProduct.img}
+              src={featureProduct.image || ""}
               className="w-full h-80 object-contain group-hover:scale-110 transition-transform duration-700 cursor-pointer"
               alt={featureProduct.name}
             />
@@ -67,23 +90,30 @@ const HotDeals = () => {
 
           <div className="space-y-6">
             <div className="text-center space-y-2">
-              <Link to="/product/1">
+              <Link to={`/product/${featureProduct.id}`}>
                 <h3 className="text-2xl font-medium text-gray-900 group-hover:text-green-600 transition-colors uppercase tracking-tight cursor-pointer">
                   {featureProduct.name}
                 </h3>
               </Link>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-3xl font-black text-green-600">
-                  {featureProduct.price}
+                  ${featureProduct.price}
                 </span>
-                <span className="text-xl text-gray-300 line-through font-medium">
-                  {featureProduct.oldprice}
-                </span>
+                {featureProduct.oldPrice && (
+                  <span className="text-xl text-gray-300 line-through font-medium">
+                    ${featureProduct.oldPrice}
+                  </span>
+                )}
               </div>
               <div className="flex items-center justify-center gap-3">
                 <div className="flex text-yellow-500">
                   {[1, 2, 3, 4, 5].map((_, i) => (
-                    <Star key={i} fill="currentColor" size={16} />
+                    <Star 
+                      key={i} 
+                      fill={i < Math.floor(featureProduct.rating || 0) ? "currentColor" : "none"} 
+                      size={16} 
+                      className={i < Math.floor(featureProduct.rating || 0) ? "" : "text-gray-200"}
+                    />
                   ))}
                 </div>
                 <span className="text-sm font-medium text-gray-400">
@@ -122,12 +152,14 @@ const HotDeals = () => {
               <Button className="flex-1 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white font-black text-lg shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1">
                 Add to cart <ShoppingBag size={24} className="ml-2" />
               </Button>
-              <Button
-                variant="outline"
-                className="w-14 h-14 rounded-full p-0 flex items-center justify-center border-gray-100 hover:bg-gray-50 hover:text-green-600 transition-all"
-              >
-                <Eye size={24} />
-              </Button>
+              <Link to={`/product/${featureProduct.id}`}>
+                <Button
+                  variant="outline"
+                  className="w-14 h-14 rounded-full p-0 flex items-center justify-center border-gray-100 hover:bg-gray-50 hover:text-green-600 transition-all"
+                >
+                  <Eye size={24} />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -136,15 +168,16 @@ const HotDeals = () => {
       {/* Grid of other deals */}
       <div className="flex-1">
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-          {Products.slice(1, 13).map((item, i) => (
+          {otherDeals.map((item, i) => (
             <ProductsHolder
-              key={i}
-              imag={item.img}
+              key={item.id || i}
+              id={item.id}
+              imag={item.image || ""}
               name={item.name}
               newprise={item.price}
-              oldprise={item.oldprice}
-              rate={item.rate}
-              sale={item.forsale}
+              oldprise={item.oldPrice}
+              rate={item.rating}
+              sale={!!item.oldPrice}
             />
           ))}
         </div>

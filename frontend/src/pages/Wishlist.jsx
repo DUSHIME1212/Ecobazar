@@ -1,36 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { X, Facebook, Twitter, Instagram, Youtube, Search } from "lucide-react";
+import { X, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 export default function Wishlist() {
-  const wishlistItems = [
-    {
-      id: 1,
-      name: "Green Capsicum",
-      price: 14.99,
-      oldPrice: 20.99,
-      image:
-        "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=200&auto=format&fit=crop",
-      stock: "In Stock",
-    },
-    {
-      id: 2,
-      name: "Chinese Cabbage",
-      price: 45.0,
-      image:
-        "https://images.unsplash.com/photo-1590411641322-076f7df12613?q=80&w=200&auto=format&fit=crop",
-      stock: "In Stock",
-    },
-    {
-      id: 3,
-      name: "Fresh Sujapuri Mango",
-      price: 9.0,
-      image:
-        "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=200&auto=format&fit=crop",
-      stock: "Out of Stock",
-    },
-  ];
+  const { wishlistItems, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -59,59 +36,71 @@ export default function Wishlist() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {wishlistItems.map((item) => (
-                <tr
-                  key={item.id}
-                  className="group hover:bg-gray-50/30 transition-colors"
-                >
-                  <td className="px-8 py-6">
-                    <div className="flex items-center gap-6">
-                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 border border-gray-100 flex-shrink-0">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                      <span className="font-medium text-gray-900 text-lg">
-                        {item.name}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-medium text-gray-900">
-                        ${item.price.toFixed(2)}
-                      </span>
-                      {item.oldPrice && (
-                        <span className="text-sm text-gray-300 line-through">
-                          ${item.oldPrice.toFixed(2)}
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-8 py-6">
-                    <Badge
-                      className={`${item.stock === "In Stock" ? "bg-green-100 text-green-700 hover:bg-green-100" : "bg-red-50 text-red-600 hover:bg-red-50"} border-none font-medium uppercase tracking-tighter text-[10px] px-3 py-1`}
-                    >
-                      {item.stock}
-                    </Badge>
-                  </td>
-                  <td className="px-8 py-6">
-                    <div className="flex items-center justify-end gap-3">
-                      <Button
-                        disabled={item.stock === "Out of Stock"}
-                        className={`rounded-full px-6 h-11 font-medium shadow-md shadow-green-100 ${item.stock === "Out of Stock" ? "bg-gray-100 text-gray-400" : "bg-green-600 hover:bg-green-700 text-white"}`}
-                      >
-                        Add to Cart
-                      </Button>
-                      <button className="w-11 h-11 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all border border-gray-100">
-                        <X size={18} />
-                      </button>
-                    </div>
+              {wishlistItems.length === 0 ? (
+                <tr>
+                  <td colSpan="4" className="px-8 py-20 text-center text-gray-400">
+                    Your wishlist is empty.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                wishlistItems.map((item) => (
+                  <tr
+                    key={item.id}
+                    className="group hover:bg-gray-50/30 transition-colors"
+                  >
+                    <td className="px-8 py-6">
+                      <div className="flex items-center gap-6">
+                        <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 border border-gray-100 flex-shrink-0">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                        <span className="font-medium text-gray-900 text-lg">
+                          {item.name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-8 py-6">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-medium text-gray-900">
+                          ${item.price.toFixed(2)}
+                        </span>
+                        {item.oldPrice && (
+                          <span className="text-sm text-gray-300 line-through">
+                            ${parseFloat(item.oldPrice).toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-8 py-6">
+                      <Badge
+                        className={`${(item.stock > 0 || item.stock === "In Stock") ? "bg-green-100 text-green-700 hover:bg-green-100" : "bg-red-50 text-red-600 hover:bg-red-50"} border-none font-medium uppercase tracking-tighter text-[10px] px-3 py-1`}
+                      >
+                        {(item.stock > 0 || item.stock === "In Stock") ? "In Stock" : "Out of Stock"}
+                      </Badge>
+                    </td>
+                    <td className="px-8 py-6">
+                      <div className="flex items-center justify-end gap-3">
+                        <Button
+                          onClick={() => addToCart(item)}
+                          disabled={item.stock === 0 || item.stock === "Out of Stock"}
+                          className={`rounded-full px-6 h-11 font-medium shadow-md shadow-green-100 ${(item.stock === 0 || item.stock === "Out of Stock") ? "bg-gray-100 text-gray-400" : "bg-green-600 hover:bg-green-700 text-white"}`}
+                        >
+                          Add to Cart
+                        </Button>
+                        <button 
+                          onClick={() => toggleWishlist(item)}
+                          className="w-11 h-11 rounded-full flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all border border-gray-100"
+                        >
+                          <X size={18} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

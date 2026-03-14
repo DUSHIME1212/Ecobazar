@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
@@ -11,119 +11,50 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
+import { Eye, Heart, ShoppingCart, Star, Loader2 } from "lucide-react";
 import QuickViewDialog from "@/components/QuickViewDialog";
-
-const products = [
-  {
-    id: 1,
-    name: "Big Potatoes",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-    isSale: false,
-  },
-  {
-    id: 2,
-    name: "Chanisa Cabbage",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1590411641322-076f7df12613?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-    isSale: false,
-  },
-  {
-    id: 3,
-    name: "Ladies Finger",
-    price: 14.99,
-    oldPrice: 20.99,
-    image:
-      "https://images.unsplash.com/photo-1449339044511-d14d2325ae1b?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-    isSale: false,
-    outOfStock: true,
-  },
-  {
-    id: 4,
-    name: "Eggplant",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1566270832367-e95e4e73d328?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 5,
-    name: "Fresh Cauliflower",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1568584711075-3d021a7c3fb3?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 6,
-    name: "Green Apple",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 7,
-    name: "Green Capsicum",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 8,
-    name: "Green Chili",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 9,
-    name: "Green Cucumber",
-    price: 14.99,
-    oldPrice: 20.99,
-    image:
-      "https://images.unsplash.com/photo-1449302732332-9cb48013e840?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-    isSale: true,
-    discount: 50,
-  },
-  {
-    id: 10,
-    name: "Green Lettuce",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1622206141855-46096cc72bb4?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 11,
-    name: "Ladies Finger",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1449339044511-d14d2325ae1b?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-  {
-    id: 12,
-    name: "Green Capsicum",
-    price: 14.99,
-    image:
-      "https://images.unsplash.com/photo-1563203362-09419b48995a?q=80&w=400&auto=format&fit=crop",
-    rating: 4,
-  },
-];
+import { productAPI, categoryAPI } from "../services/api";
 
 function Shop() {
-  const [priceRange, setPriceRange] = useState([50, 1500]);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [priceRange, setPriceRange] = useState([0, 1500]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sort, setSort] = useState("latest");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [productsData, categoriesData] = await Promise.all([
+          productAPI.getAll({
+            category: selectedCategory,
+            minPrice: priceRange[0],
+            maxPrice: priceRange[1],
+            sort,
+          }),
+          categoryAPI.getAll(),
+        ]);
+        setProducts(productsData);
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Failed to fetch shop data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [selectedCategory, priceRange, sort]);
+
+  if (loading && products.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-10 h-10 animate-spin text-green-600" />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -149,33 +80,44 @@ function Shop() {
               All Categories
             </h3>
             <div className="space-y-2">
-              {[
-                { name: "Fresh Fruit", count: 134, checked: false },
-                { name: "Vegetables", count: 151, checked: true },
-                { name: "Cooking", count: 54, checked: false },
-                { name: "Snacks", count: 47, checked: false },
-                { name: "Beverages", count: 43, checked: false },
-                { name: "Beauty & Health", count: 11, checked: false },
-                { name: "Bread & Bakery", count: 15, checked: false },
-              ].map((cat) => (
+              <div 
+                className="flex items-center justify-between group cursor-pointer"
+                onClick={() => setSelectedCategory(null)}
+              >
+                <div className="flex items-center gap-3">
+                  <Checkbox
+                    id="all-categories"
+                    checked={selectedCategory === null}
+                    className="rounded-full border-gray-300 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+                  />
+                  <label
+                    htmlFor="all-categories"
+                    className={`text-sm ${selectedCategory === null ? "text-gray-900 font-medium" : "text-gray-600"} group-hover:text-green-600 transition-colors`}
+                  >
+                    All Categories
+                  </label>
+                </div>
+              </div>
+              {categories.map((cat) => (
                 <div
-                  key={cat.name}
+                  key={cat.id}
                   className="flex items-center justify-between group cursor-pointer"
+                  onClick={() => setSelectedCategory(cat.name)}
                 >
                   <div className="flex items-center gap-3">
                     <Checkbox
-                      id={cat.name}
-                      checked={cat.checked}
+                      id={cat.id}
+                      checked={selectedCategory === cat.name}
                       className="rounded-full border-gray-300 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
                     />
                     <label
-                      htmlFor={cat.name}
-                      className={`text-sm ${cat.checked ? "text-gray-900 font-medium" : "text-gray-600"} group-hover:text-green-600 transition-colors`}
+                      htmlFor={cat.id}
+                      className={`text-sm ${selectedCategory === cat.name ? "text-gray-900 font-medium" : "text-gray-600"} group-hover:text-green-600 transition-colors`}
                     >
                       {cat.name}
                     </label>
                   </div>
-                  <span className="text-xs text-gray-400">({cat.count})</span>
+                  <span className="text-xs text-gray-400">({cat._count.products})</span>
                 </div>
               ))}
             </div>
@@ -298,7 +240,7 @@ function Shop() {
                 <div key={product.id} className="flex gap-4 group">
                   <div className="w-20 h-20 rounded-lg overflow-hidden border border-gray-100 shrink-0">
                     <img
-                      src={product.image}
+                      src={product.image || ""}
                       className="w-full h-full object-cover"
                       alt={product.name}
                     />
@@ -325,7 +267,7 @@ function Shop() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-4">
               <span className="text-gray-400 text-sm">Sort by:</span>
-              <Select defaultValue="latest">
+              <Select defaultValue={sort} onValueChange={setSort}>
                 <SelectTrigger className="w-[180px] rounded-full">
                   <SelectValue placeholder="Latest" />
                 </SelectTrigger>
@@ -341,7 +283,7 @@ function Shop() {
               </Select>
             </div>
             <div className="text-sm">
-              <span className="font-medium">52</span>{" "}
+              <span className="font-medium">{products.length}</span>{" "}
               <span className="text-gray-500 font-medium">Results Found</span>
             </div>
           </div>
@@ -355,7 +297,7 @@ function Shop() {
                 <div className="aspect-square relative overflow-hidden bg-gray-50">
                   <Link to={`/product/${product.id}`}>
                     <img
-                      src={product.image}
+                      src={product.image || ""}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
                       alt={product.name}
                     />

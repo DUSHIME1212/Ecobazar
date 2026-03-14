@@ -12,7 +12,10 @@ import {
 } from "lucide-react";
 import CartDrawer from "./CartDrawer";
 
+import { useCart } from "@/context/CartContext";
+
 export default function Navbar() {
+  const { cartItems, subtotal } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const mainLinks = [
@@ -77,11 +80,11 @@ export default function Navbar() {
             <div className="flex items-center gap-4 cursor-pointer group p-2 hover:bg-gray-50 transition-all">
               <div className="relative">
                 <ShoppingBag size={32} className="text-gray-900 group-hover:text-[#2C742F] transition-colors" />
-                <span className="absolute -top-1 -right-1 bg-[#2C742F] text-white text-[10px] font-medium w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm">2</span>
+                <span className="absolute -top-1 -right-1 bg-[#2C742F] text-white text-[10px] font-medium w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm">{cartItems.length}</span>
               </div>
               <div className="hidden lg:block">
                 <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest leading-none mb-1">Shopping cart:</p>
-                <p className="text-sm font-medium text-gray-900 leading-none">$57.00</p>
+                <p className="text-sm font-medium text-gray-900 leading-none">${subtotal.toFixed(2)}</p>
               </div>
             </div>
           </CartDrawer>
