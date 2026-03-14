@@ -1,5 +1,6 @@
 import { Eye, Heart, ShoppingBag, Star } from "@phosphor-icons/react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
   return (
@@ -11,21 +12,25 @@ const ProductsHolder = ({ imag, name, newprise, oldprise, rate, sale }) => {
       ) : (
         <span className="p-1 mt-6"></span>
       )}
-      <img src={imag} alt={name} className="w-full h-40 object-contain" />
+      <Link to="/product/1" className="block">
+        <img src={imag} alt={name} className="w-full h-40 object-contain group-hover:scale-105 transition-transform duration-500 cursor-pointer" />
+      </Link>
       <div className="absolute hidden group-hover:flex flex-col gap-2 duration-700 right-4 top-4">
-        <span className="p-2 bg-black/10 rounded-full">
+        <span className="p-2 bg-black/10 rounded-full cursor-pointer hover:bg-green-600 hover:text-white transition-colors">
           <Heart weight="fill" size={24} />
         </span>
-        <span className="p-2 bg-black/10 rounded-full">
+        <span className="p-2 bg-black/10 rounded-full cursor-pointer hover:bg-green-600 hover:text-white transition-colors">
           <Eye weight="light" size={24} />
         </span>
       </div>
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-lg font-medium">{name}</h2>
+          <Link to="/product/1">
+            <h2 className="text-lg font-medium hover:text-green-600 transition-colors cursor-pointer">{name}</h2>
+          </Link>
           <div className="flex items-center gap-2 text-sm">
-            <h1 className="text-xl">{newprise}</h1>
-            <h2 className="line-through opacity-40">{oldprise}</h2>
+            <h1 className="text-xl font-medium">{newprise}</h1>
+            <h2 className="line-through opacity-40 font-medium">{oldprise}</h2>
           </div>
         </div>
         <div className="size-fit p-3 group-hover:bg-green-500 group-hover:text-white duration-700 bg-black/10 rounded-full">

@@ -1,18 +1,8 @@
 const router = require('express').Router();
 
-const { PrismaClient } = require('@prisma/client')
-
-const prisma = new PrismaClient()
-
-router.get('/', async (req, res, next) => {
-  try{
-    const users = await prisma.user.findMany({})
-    res.send(users);
-  }
-  catch(err){
-    console.error(err)
-  }
-  
-});
+router.use('/auth', require('./v1/auth.route'));
+router.use('/products', require('./v1/product.route'));
+router.use('/categories', require('./v1/category.route'));
+router.use('/orders', require('./v1/order.route'));
 
 module.exports = router;

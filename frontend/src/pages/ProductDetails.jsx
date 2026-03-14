@@ -95,7 +95,7 @@ function ProductDetails() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-24 py-8">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
         <Link to="/" className="hover:text-green-600 transition-colors">
@@ -268,7 +268,7 @@ function ProductDetails() {
       </div>
 
       {/* Tabs Section */}
-      <Tabs defaultValue="descriptions" className="w-full mb-16">
+      <Tabs defaultValue="descriptions" className="w-full flex flex-col mb-16">
         <TabsList className="w-full justify-center bg-transparent border-b border-gray-100 rounded-none h-auto p-0 mb-8 overflow-x-auto no-scrollbar">
           <TabsTrigger
             value="descriptions"

@@ -353,11 +353,13 @@ function Shop() {
                 className="group relative border border-gray-100 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 bg-white"
               >
                 <div className="aspect-square relative overflow-hidden bg-gray-50">
-                  <img
-                    src={product.image}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    alt={product.name}
-                  />
+                  <Link to={`/product/${product.id}`}>
+                    <img
+                      src={product.image}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                      alt={product.name}
+                    />
+                  </Link>
 
                   {/* Badges */}
                   {product.isSale && (
@@ -394,9 +396,11 @@ function Shop() {
 
                 <div className="p-4 space-y-2">
                   <div className="flex justify-between items-center text-sm">
-                    <h3 className="text-gray-700 font-medium group-hover:text-green-600 transition-colors">
-                      {product.name}
-                    </h3>
+                    <Link to={`/product/${product.id}`}>
+                      <h3 className="text-gray-700 font-medium group-hover:text-green-600 transition-colors cursor-pointer">
+                        {product.name}
+                      </h3>
+                    </Link>
                     <div className="flex text-orange-400">
                       <Star size={12} fill="currentColor" />
                     </div>

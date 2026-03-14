@@ -57,19 +57,21 @@ const HotDeals = () => {
             </button>
           </div>
 
-          <div className="relative flex-1 py-8">
+          <Link to="/product/1" className="relative flex-1 py-8 block">
             <img
               src={featureProduct.img}
-              className="w-full h-80 object-contain group-hover:scale-110 transition-transform duration-700"
+              className="w-full h-80 object-contain group-hover:scale-110 transition-transform duration-700 cursor-pointer"
               alt={featureProduct.name}
             />
-          </div>
+          </Link>
 
           <div className="space-y-6">
             <div className="text-center space-y-2">
-              <h3 className="text-2xl font-black text-gray-900 group-hover:text-green-600 transition-colors uppercase tracking-tight">
-                {featureProduct.name}
-              </h3>
+              <Link to="/product/1">
+                <h3 className="text-2xl font-medium text-gray-900 group-hover:text-green-600 transition-colors uppercase tracking-tight cursor-pointer">
+                  {featureProduct.name}
+                </h3>
+              </Link>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-3xl font-black text-green-600">
                   {featureProduct.price}
