@@ -43,7 +43,7 @@ export default function Wishlist() {
         <span className="text-gray-900 font-medium">Wishlist</span>
       </div>
 
-      <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-12 uppercase tracking-tight">
+      <h1 className="text-3xl font-medium text-center text-gray-900 mb-12 uppercase tracking-tight">
         My Wishlist
       </h1>
 

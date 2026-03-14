@@ -52,7 +52,7 @@ export default function ShoppingCartPage() {
         <span className="text-gray-900 font-medium">Shopping Cart</span>
       </div>
 
-      <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-12 uppercase tracking-tight">
+      <h1 className="text-3xl font-medium text-center text-gray-900 mb-12 uppercase tracking-tight">
         My Shopping Cart
       </h1>
 
@@ -163,7 +163,7 @@ export default function ShoppingCartPage() {
         {/* Right Side: Totals */}
         <aside className="w-full lg:w-96 sticky top-36">
           <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-xl shadow-gray-100/50 space-y-6">
-            <h3 className="text-2xl font-extrabold text-gray-900 border-b border-gray-50 pb-4">
+            <h3 className="text-2xl font-medium text-gray-900 border-b border-gray-50 pb-4">
               Cart Total
             </h3>
             <div className="space-y-4">

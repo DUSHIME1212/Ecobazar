@@ -57,7 +57,7 @@ export default function Checkout() {
         <div className="flex-1 space-y-12">
           {/* Billing Information */}
           <section className="space-y-8">
-            <h2 className="text-2xl font-extrabold text-gray-900 uppercase tracking-tight">
+            <h2 className="text-2xl font-medium text-gray-900 uppercase tracking-tight">
               Billing Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -179,7 +179,7 @@ export default function Checkout() {
 
           {/* Additional Info */}
           <section className="space-y-6 pt-8 border-t border-gray-100">
-            <h2 className="text-2xl font-extrabold text-gray-900 uppercase tracking-tight">
+            <h2 className="text-2xl font-medium text-gray-900 uppercase tracking-tight">
               Additional Info
             </h2>
             <div className="space-y-2">
@@ -197,7 +197,7 @@ export default function Checkout() {
         {/* Right Side: Order Summary & Payment */}
         <aside className="w-full lg:w-[450px] sticky top-36">
           <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-2xl shadow-gray-100/50 space-y-8">
-            <h3 className="text-2xl font-extrabold text-gray-900">
+            <h3 className="text-2xl font-medium text-gray-900">
               Order Summery
             </h3>
 
@@ -242,7 +242,7 @@ export default function Checkout() {
               </div>
               <div className="h-px bg-gray-100"></div>
               <div className="flex justify-between items-center text-xl">
-                <span className="text-gray-900 font-extrabold">Total:</span>
+                <span className="text-gray-900 font-medium">Total:</span>
                 <span className="text-green-600 font-black text-2xl">
                   ${subtotal.toFixed(2)}
                 </span>
@@ -250,7 +250,7 @@ export default function Checkout() {
             </div>
 
             <div className="space-y-6 pt-6">
-              <h4 className="text-lg font-extrabold text-gray-900 uppercase tracking-tight">
+              <h4 className="text-lg font-medium text-gray-900 uppercase tracking-tight">
                 Payment Method
               </h4>
               <RadioGroup defaultValue="cod" className="space-y-3">

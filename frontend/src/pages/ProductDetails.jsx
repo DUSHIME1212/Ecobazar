@@ -177,7 +177,7 @@ function ProductDetails() {
               <span className="text-gray-300 line-through text-2xl font-medium">
                 $48.00
               </span>
-              <span className="text-3xl font-extrabold text-green-600">
+              <span className="text-3xl font-medium text-green-600">
                 $17.28
               </span>
             </div>
@@ -470,7 +470,7 @@ function ProductDetails() {
       {/* Related Products */}
       <section className="space-y-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-4xl font-extrabold text-gray-900 text-center w-full">
+          <h2 className="text-4xl font-medium text-gray-900 text-center w-full">
             Related Products
           </h2>
         </div>
@@ -502,7 +502,7 @@ function ProductDetails() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-extrabold text-gray-900 font-mono tracking-tighter">
+                  <span className="font-medium text-gray-900 font-mono tracking-tighter">
                     ${product.price}
                   </span>
                   {product.oldPrice && (
