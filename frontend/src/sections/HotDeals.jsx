@@ -62,10 +62,10 @@ const HotDeals = () => {
   const otherDeals = products.slice(1, 13);
 
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-8 min-h-[720px]">
+    <div className="w-full flex flex-col lg:flex-row gap-0 min-h-[720px]">
       {/* Featured Big Deal */}
       <div className="w-full lg:w-2/5 group">
-        <div className="bg-white rounded-2xl border-2 border-green-500/10 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-500 p-6 flex flex-col h-full relative overflow-hidden">
+        <div className="bg-white border-2 border-green-500/10 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-500 p-6 flex flex-col h-full relative overflow-hidden">
           <div className="flex justify-between items-start z-10">
             <div className="flex gap-2">
               <span className="px-3 py-1 bg-red-500 text-white rounded-lg text-xs font-medium uppercase tracking-wider">
@@ -96,7 +96,7 @@ const HotDeals = () => {
                 </h3>
               </Link>
               <div className="flex items-center justify-center gap-3">
-                <span className="text-3xl font-black text-green-600">
+                <span className="text-3xl  text-green-600">
                   ${featureProduct.price}
                 </span>
                 {featureProduct.oldPrice && (
@@ -105,7 +105,7 @@ const HotDeals = () => {
                   </span>
                 )}
               </div>
-              <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center justify-center gap-0">
                 <div className="flex text-yellow-500">
                   {[1, 2, 3, 4, 5].map((_, i) => (
                     <Star 
@@ -122,8 +122,8 @@ const HotDeals = () => {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-6 flex flex-col items-center gap-4">
-              <p className="text-sm font-black text-gray-400 uppercase tracking-widest italic">
+            <div className="bg-gray-50 p-6 flex flex-col items-center gap-4">
+              <p className="text-sm text-gray-400 uppercase tracking-widest">
                 Hurry up! Offer ends In:
               </p>
               <div className="flex gap-4 items-center">
@@ -137,7 +137,7 @@ const HotDeals = () => {
                     key={idx}
                     className="flex flex-col items-center min-w-16"
                   >
-                    <span className="text-3xl font-black text-gray-900 leading-none">
+                    <span className="text-3xl text-gray-900 leading-none">
                       {String(unit.val).padStart(2, "0")}
                     </span>
                     <span className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mt-1">
@@ -149,13 +149,13 @@ const HotDeals = () => {
             </div>
 
             <div className="flex gap-4">
-              <Button className="flex-1 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white font-black text-lg shadow-xl shadow-green-100 transition-all transform hover:-translate-y-1">
+              <Button className="flex-1 h-14 rounded-full bg-green-600 hover:bg-green-700 text-white text-lg shadow-xl shadow-green-100 transition-all transform">
                 Add to cart <ShoppingBag size={24} className="ml-2" />
               </Button>
               <Link to={`/product/${featureProduct.id}`}>
                 <Button
                   variant="outline"
-                  className="w-14 h-14 rounded-full p-0 flex items-center justify-center border-gray-100 hover:bg-gray-50 hover:text-green-600 transition-all"
+                  className="w-14 h-14 rounded-full p-0 flex items-center justify-center border-gray-100 hover:bg-gray-50 hover:text-green-600 text-black bg-green-100 transition-all"
                 >
                   <Eye size={24} />
                 </Button>
@@ -167,7 +167,7 @@ const HotDeals = () => {
 
       {/* Grid of other deals */}
       <div className="flex-1">
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-0 rounded-xl">
           {otherDeals.map((item, i) => (
             <ProductsHolder
               key={item.id || i}

@@ -20,7 +20,7 @@ const HomepageLanding = () => {
         <Featured />
       </div>
       {/* Categories */}
-      <div className="px-8 md:px-16 lg:px-32">
+      {/* <div className="px-8 md:px-16 lg:px-32">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-medium">Popular Categories</h1>
           <div className="flex gap-2 items-center text-green-500 underline cursor-pointer">
@@ -29,7 +29,7 @@ const HomepageLanding = () => {
           </div>
         </div>
         <PopularCategories />
-      </div>
+      </div> */}
       {/* {Popular Products} */}
       <div className="w-full px-8 md:px-16 lg:px-32">
         <h1>Popular Products</h1>
@@ -50,11 +50,11 @@ const HomepageLanding = () => {
         <h1 className="my-8">Latest News</h1>
         <LatestNewsHome />
       </div>
-      <div className="w-full gap-2 px-8 md:px-16 lg:px-32  flex flex-col items-start my-8 justify-start">
+      <div className="w-full gap-2 px-8 md:px-16 lg:px-32 py-16 flex flex-col items-start my-8 justify-start">
         <h1>Client Testimonials</h1>
         <TestimonialsHome />
       </div>
-      <div className="px-8 md:px-16 lg:px-32">
+      <div className="px-8 md:px-16 py-16 lg:px-32">
         <CompanyLogo />
       </div>
     </div>

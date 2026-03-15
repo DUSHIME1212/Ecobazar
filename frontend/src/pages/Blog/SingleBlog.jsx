@@ -1,8 +1,6 @@
-```javascript
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { 
-  Calendar, 
   User, 
   MessageCircle, 
   Tag, 
@@ -10,14 +8,44 @@ import {
   Twitter, 
   Instagram, 
   Linkedin,
-  ArrowLeft,
-  ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Filter from "../../components/Blog/Sidebar/filter";
+import { useMemo } from "react";
+import matter from "gray-matter";
+import ReactMarkdown from "react-markdown";
 
 const SingleBlog = () => {
+  const { singleblog: slug } = useParams();
   const page = useLocation().pathname.split("/").pop();
+
+  const blogData = useMemo(() => {
+    const blogFiles = import.meta.glob("../../content/blogs/*.md", {
+      as: "raw",
+      eager: true,
+    });
+
+    const path = `../../content/blogs/${slug}.md`;
+    const content = blogFiles[path];
+
+    if (!content) return null;
+
+    const { data, content: markdownContent } = matter(content);
+    return { ...data, content: markdownContent };
+  }, [slug]);
+
+  if (!blogData) {
+    return (
+      <div className="bg-white min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold">Blog not found</h1>
+        <Link to="/blog" className="text-green-600 mt-4 hover:underline">Back to Blog</Link>
+      </div>
+    );
+  }
+
+  const blogDate = new Date(blogData.date);
+  const day = blogDate.getDate();
+  const month = blogDate.toLocaleString('default', { month: 'short' });
 
   return (
     <div className="bg-white min-h-screen">
@@ -31,13 +59,13 @@ const SingleBlog = () => {
                {/* Hero Image */}
                <div className="relative h-[500px] rounded-[40px] overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1200&auto=format&fit=crop" 
+                    src={blogData.image} 
                     className="w-full h-full object-cover" 
-                    alt="Blog Hero"
+                    alt={blogData.title}
                   />
                   <div className="absolute top-8 left-8 bg-green-600 text-white rounded-2xl p-4 flex flex-col items-center min-w-16 shadow-lg">
-                    <span className="text-2xl font-black leading-none">18</span>
-                    <span className="text-xs font-medium uppercase tracking-widest mt-1">Nov</span>
+                    <span className="text-2xl font-black leading-none">{day}</span>
+                    <span className="text-xs font-medium uppercase tracking-widest mt-1">{month}</span>
                   </div>
                </div>
 
@@ -45,11 +73,11 @@ const SingleBlog = () => {
                <div className="flex flex-wrap gap-6 items-center border-b border-gray-100 pb-8">
                   <div className="flex items-center gap-2 text-gray-500 font-medium text-xs uppercase tracking-widest">
                     <Tag size={16} className="text-green-600" />
-                    <span>Food & Healthy</span>
+                    <span>{blogData.category}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-500 font-medium text-xs uppercase tracking-widest">
                     <User size={16} className="text-green-600" />
-                    <span>By Ecobazar Admin</span>
+                    <span>By {blogData.author}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-500 font-medium text-xs uppercase tracking-widest">
                     <MessageCircle size={16} className="text-green-600" />
@@ -60,25 +88,27 @@ const SingleBlog = () => {
                {/* Content */}
                <div className="space-y-6">
                   <h1 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
-                    Why organic food is good for your health and environment?
+                    {blogData.title}
                   </h1>
                   <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-6">
-                    <p className="font-medium text-xl text-gray-900 italic border-l-4 border-green-500 pl-6">
-                      "Organic food is food produced by methods that comply with the standards of organic farming. Standards vary worldwide, but organic farming features practices that cycle resources, promote ecological balance, and conserve biodiversity."
-                    </p>
-                    <p>
-                      Maecenas et ligula non nisl egestas efficitur. Mauris elementum, justo eu interdum pretium, risus nisl egestas dui, vitae maximus leo velit sit amet augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                    </p>
-                    <p>
-                      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam erat volutpat. Ut accumsan ante ante, sit amet condimentum lacus semper vitae.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-                       <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover shadow-lg" alt="Organic 1" />
-                       <img src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80&w=600&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover shadow-lg" alt="Organic 2" />
-                    </div>
-                    <p>
-                      Nam hendrerit laoreet feugiat. Suspendisse potenti. Nam et elementum elit. Sed ut magna vitae sapien scelerisque scelerisque. Vivamus porta iaculis interdum. Mauris pellentesque lectus iaculis eros cursus, sit amet scelerisque justo sodales.
-                    </p>
+                    <ReactMarkdown 
+                      components={{
+                        h3: ({ node, ...props }) => <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4" {...props} />,
+                        p: ({ node, ...props }) => <p className="mb-4" {...props} />,
+                        ul: ({ node, ...props }) => <ul className="list-disc pl-6 mb-4" {...props} />,
+                        li: ({ node, ...props }) => <li className="mb-2" {...props} />,
+                        blockquote: ({ node, ...props }) => <blockquote className="font-medium text-xl text-gray-900 italic border-l-4 border-green-500 pl-6 my-8" {...props} />
+                      }}
+                    >
+                      {blogData.content}
+                    </ReactMarkdown>
+
+                    {blogData.image1 && blogData.image2 && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+                        <img src={blogData.image1} className="rounded-3xl h-64 w-full object-cover shadow-lg" alt="Organic 1" />
+                        <img src={blogData.image2} className="rounded-3xl h-64 w-full object-cover shadow-lg" alt="Organic 2" />
+                      </div>
+                    )}
                   </div>
                </div>
 
@@ -87,7 +117,7 @@ const SingleBlog = () => {
                  <div className="flex items-center gap-4">
                     <span className="text-sm font-black text-gray-400 uppercase tracking-widest">Tags:</span>
                     <div className="flex gap-2">
-                       {['Organic', 'Healthy', 'Environmental'].map(tag => (
+                       {blogData.tags?.map(tag => (
                          <span key={tag} className="px-4 py-2 bg-gray-50 text-gray-600 font-medium text-xs rounded-full hover:bg-green-600 hover:text-white transition-all cursor-pointer">
                            {tag}
                          </span>
@@ -114,11 +144,11 @@ const SingleBlog = () => {
                     alt="Author"
                   />
                   <div className="space-y-4 text-center md:text-left">
-                    <h4 className="text-2xl font-black text-gray-900">John Doe</h4>
+                    <h4 className="text-2xl font-black text-gray-900">{blogData.author}</h4>
                     <p className="text-gray-500 font-medium leading-relaxed italic">
                       "I am a full-time blogger and food lover. Creating content about healthy lifestyle and organic food is my passion. Follow me for more tips!"
                     </p>
-                    <Link to="#" className="inline-block text-green-600 font-black border-b-2 border-green-600 pb-1 hover:text-green-700 hover:border-green-700 transition-all">
+                    <Link to="/blog" className="inline-block text-green-600 font-black border-b-2 border-green-600 pb-1 hover:text-green-700 hover:border-green-700 transition-all">
                       View all posts
                     </Link>
                   </div>
@@ -161,4 +191,3 @@ const SingleBlog = () => {
 };
 
 export default SingleBlog;
-```;

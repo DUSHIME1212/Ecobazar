@@ -4,50 +4,63 @@ import { SlidersHorizontal, ChevronDown } from "lucide-react";
 import { categoriesShop } from "../../utils/utils";
 import BlogCard from "../../components/Blog/BlogCard";
 import { useState, useMemo } from "react";
+import matter from "gray-matter";
 import Pagination from "../../components/Blog/Pagination";
 import Filter from "../../components/Blog/Sidebar/filter";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from "@/components/ui/select";
 
 export default function BlogList() {
+  const blogs = useMemo(() => {
+    const blogFiles = import.meta.glob("../../content/blogs/*.md", {
+      as: "raw",
+      eager: true,
+    });
+
+    const allBlogs = Object.entries(blogFiles).map(([path, content]) => {
+      const { data } = matter(content);
+      const slug = path.split("/").pop().replace(".md", "");
+      return {
+        id: slug,
+        slug,
+        title: data.title,
+        category: data.category,
+        date: data.date,
+        image: data.image,
+        author: data.author
+      };
+    });
+
+    // Sort by date (latest first)
+    return allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }, []);
+
   const page = useLocation().pathname.split("/").pop();
   const blogsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const blogs = useMemo(() => {
-    // Mock blog data
-    const allBlogs = [
-      { id: 1, title: "Curabitur porttitor orci eget neque accumsan venenatis.", category: "Vegerable" },
-      { id: 2, title: "How to Keep Your Vegetables Fresh", category: "Vegerable" },
-      { id: 3, title: "Benefits of Organic Farming", category: "Organic" },
-      { id: 4, title: "Seasonal Fruits and Their Benefits", category: "Fruit" },
-      { id: 5, title: "Modern Farming Techniques", category: "Organic" },
-      { id: 6, title: "Healthy Eating for a Better Life", category: "Healthy" },
-      { id: 7, title: "Understanding Food Labels", category: "Healthy" },
-      { id: 8, title: "Best Tools for Home Gardening", category: "Vegerable" },
-    ];
-
-    let filtered = allBlogs;
+  const filteredBlogs = useMemo(() => {
+    let filtered = blogs;
     if (selectedCategory !== "All") {
       filtered = filtered.filter(blog => blog.category === selectedCategory);
     }
     if (searchQuery) {
-      filtered = filtered.filter(blog => 
+      filtered = filtered.filter(blog =>
         blog.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
     return filtered;
-  }, [searchQuery, selectedCategory]);
+  }, [blogs, searchQuery, selectedCategory]);
 
-  const totalPages = Math.ceil(blogs.length / blogsPerPage);
-  const currentBlogs = blogs.slice((currentPage - 1) * blogsPerPage, currentPage * blogsPerPage);
+  const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+  const currentBlogs = filteredBlogs.slice((currentPage - 1) * blogsPerPage, currentPage * blogsPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -103,7 +116,14 @@ export default function BlogList() {
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {currentBlogs.map((blog, i) => (
                   <div key={blog.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500" style={{ animationDelay: `${i * 100}ms` }}>
-                    <BlogCard title={blog.title} category={blog.category} />
+                    <BlogCard 
+                      title={blog.title} 
+                      category={blog.category} 
+                      image={blog.image}
+                      date={blog.date}
+                      author={blog.author}
+                      slug={blog.slug}
+                    />
                   </div>
                 ))}
               </div>

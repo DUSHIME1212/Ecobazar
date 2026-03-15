@@ -14,15 +14,15 @@ export default function CartDrawer({ children }) {
   const { cartItems, subtotal, removeFromCart } = useCart();
 
   return (
-    <Sheet className="bg-white">
-      <SheetTrigger asChild className="bg-white hover:bg-gray-50">
+    <Sheet>
+      <SheetTrigger className="bg-white hover:bg-gray-50 ">
         {children || (
-          <button className="relative p-2 g-gray-100 rounded-full transition-colors hover:bg-gray-50">
+          <div className="relative p-2 bg-gray-100 rounded-full transition-colors hover:bg-gray-50 cursor-pointer">
             <ShoppingCart size={32} className="text-gray-900" />
-            <span className="absolute top-0 right-0  text-[10px] font-medium w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+            <span className="absolute top-0 right-0  text-[10px] font-medium w-5 h-5 flex items-center justify-center rounded-full border-2 border-white bg-green-600 text-white">
               {cartItems.length}
             </span>
-          </button>
+          </div>
         )}
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0 bg-white border-l border-gray-100">

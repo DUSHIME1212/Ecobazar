@@ -9,12 +9,12 @@ const BannarHome = () => {
       <div
         className="row-span-3 lg:col-span-2 rounded-2xl lg:row-span-2 relative bg-center bg-no-repeat bg-cover overflow-hidden group shadow-lg shadow-gray-100"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop')`,
+          backgroundImage: `url('/Bannar Big.png')`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
         <div className="p-8 lg:p-12 flex text-white w-full lg:w-2/3 flex-col gap-6 absolute top-0 left-0 h-full justify-center">
-          <h1 className="text-4xl lg:text-6xl font-black leading-tight tracking-tight">
+          <h1 className="text-4xl lg:text-6xl  leading-tight tracking-tight">
             Fresh & Healthy <br />
             <span className="text-green-400">Organic Food</span>
           </h1>
@@ -42,7 +42,7 @@ const BannarHome = () => {
       <div
         className="row-span-1 lg:col-span-1 rounded-2xl bg-no-repeat bg-cover relative overflow-hidden shadow-md"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80&w=600&auto=format&fit=crop')`,
+          backgroundImage: `url('/BG.png')`,
         }}
       >
         <div className="absolute inset-0 bg-black/10"></div>
@@ -51,7 +51,7 @@ const BannarHome = () => {
             <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-800">
               Summer Sale
             </span>
-            <h1 className="text-4xl font-black text-gray-900">75% OFF</h1>
+            <h1 className="text-4xl text-gray-900">75% OFF</h1>
           </div>
           <p className="text-sm font-medium text-gray-600">
             Only Fruit & Vegetable
@@ -72,7 +72,7 @@ const BannarHome = () => {
       {/* Best Deal Banner */}
       <div className="col-span-1 rounded-2xl relative overflow-hidden bg-gray-900 shadow-md group">
         <img
-          src="https://images.unsplash.com/photo-1543083477-4f7db73d8d58?q=80&w=600&auto=format&fit=crop"
+          src="/Bannar.png"
           className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700"
           alt="Best Deal"
         />
@@ -80,7 +80,7 @@ const BannarHome = () => {
           <span className="text-xs font-black uppercase tracking-[0.2em] text-green-400">
             Best Deal
           </span>
-          <h1 className="font-black text-2xl leading-tight">
+          <h1 className=" text-2xl leading-tight">
             Special Products <br />
             Deal of the Month
           </h1>

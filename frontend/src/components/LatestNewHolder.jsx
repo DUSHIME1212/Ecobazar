@@ -37,7 +37,7 @@ const LatestNewHolder = () => {
           </div>
         </div>
 
-        <h3 className="text-xl font-black text-gray-900 group-hover:text-green-600 transition-colors leading-tight">
+        <h3 className="text-xl  text-gray-900 group-hover:text-green-600 transition-colors leading-tight">
           Curabitur porttitor orci eget neque accumsan venenatis. Nunc
           fermentum.
         </h3>
@@ -46,7 +46,7 @@ const LatestNewHolder = () => {
           <Link to="/blog/singleblog">
             <Button
               variant="link"
-              className="p-0 h-auto text-green-600 hover:text-green-700 font-black flex items-center gap-2 group/btn"
+              className=" h-auto text-white hover:text-green-700 font-black flex items-center gap-2 group/btn"
             >
               <span>Read More</span>
               <ArrowRight
